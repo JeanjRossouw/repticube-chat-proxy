@@ -1,19 +1,18 @@
 export default async function handler(req, res) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Set CORS headers for ALL requests
+  res.setHeader('Access-Control-Allow-Origin', 'https://repticube.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Max-Age', '86400');
   
-  // Handle preflight request
+  // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+    return res.status(200).end();
   }
   
-  // Only allow POST requests
+  // Only allow POST
   if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
+    return res.status(405).json({ error: 'Method not allowed' });
   }
   
   try {
@@ -28,9 +27,10 @@ export default async function handler(req, res) {
     });
     
     const data = await response.json();
-    res.status(response.status).json(data);
+    return res.status(response.status).json(data);
+    
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error', message: error.message });
   }
 }
