@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   // Set CORS headers for ALL requests
-  res.setHeader('Access-Control-Allow-Origin', 'https://repticube.com');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Max-Age', '86400');
