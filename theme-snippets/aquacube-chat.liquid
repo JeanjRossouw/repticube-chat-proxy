@@ -1,0 +1,148 @@
+{%- comment -%}
+  AquaCube AI chat widget.
+
+  Install:
+    1. Copy this file into your Shopify theme:  snippets/aquacube-chat.liquid
+    2. Open layout/theme.liquid and add this line just before </body>:
+         {% render 'aquacube-chat' %}
+    3. Set the PROXY_URL constant below to the deployed Vercel proxy URL.
+       e.g. https://repticube-chat-proxy.vercel.app/api/chat
+
+  The proxy forwards to api.anthropic.com using the server-side
+  ANTHROPIC_API_KEY env var. The browser never sees the key.
+{%- endcomment -%}
+
+<style>
+  #aquacube-chat-toggle {
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #0d6efd; color: #fff; border: none; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,.18);
+    font-size: 24px;
+  }
+  #aquacube-chat-panel {
+    position: fixed; bottom: 88px; right: 20px; z-index: 9999;
+    width: 360px; max-width: calc(100vw - 40px);
+    height: 480px; max-height: calc(100vh - 120px);
+    background: #fff; border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.18);
+    display: none; flex-direction: column; overflow: hidden;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  #aquacube-chat-panel.open { display: flex; }
+  #aquacube-chat-header {
+    background: #0d6efd; color: #fff; padding: 12px 16px;
+    font-weight: 600;
+  }
+  #aquacube-chat-log {
+    flex: 1; overflow-y: auto; padding: 12px;
+    font-size: 14px; line-height: 1.45;
+  }
+  .aquacube-msg { margin-bottom: 10px; }
+  .aquacube-msg.user { text-align: right; }
+  .aquacube-msg .bubble {
+    display: inline-block; padding: 8px 12px; border-radius: 12px;
+    max-width: 80%; white-space: pre-wrap; word-wrap: break-word;
+  }
+  .aquacube-msg.user .bubble { background: #0d6efd; color: #fff; }
+  .aquacube-msg.assistant .bubble { background: #f1f3f5; color: #222; }
+  #aquacube-chat-form {
+    display: flex; border-top: 1px solid #e5e7eb; padding: 8px;
+  }
+  #aquacube-chat-input {
+    flex: 1; border: 1px solid #d1d5db; border-radius: 8px;
+    padding: 8px 12px; font-size: 14px; outline: none;
+  }
+  #aquacube-chat-send {
+    margin-left: 8px; background: #0d6efd; color: #fff;
+    border: none; border-radius: 8px; padding: 0 14px; cursor: pointer;
+  }
+  #aquacube-chat-send[disabled] { opacity: .5; cursor: not-allowed; }
+</style>
+
+<button id="aquacube-chat-toggle" aria-label="Open chat">💬</button>
+<div id="aquacube-chat-panel" role="dialog" aria-label="AquaCube chat">
+  <div id="aquacube-chat-header">AquaCube Helper</div>
+  <div id="aquacube-chat-log"></div>
+  <form id="aquacube-chat-form">
+    <input id="aquacube-chat-input" type="text" placeholder="Ask about tanks, lights, filters…" autocomplete="off" />
+    <button id="aquacube-chat-send" type="submit">Send</button>
+  </form>
+</div>
+
+<script>
+(function () {
+  const PROXY_URL = 'https://REPLACE_ME.vercel.app/api/chat';
+  const MODEL = 'claude-haiku-4-5-20251001';
+
+  const SYSTEM_PROMPT = [
+    "You are AquaCube Helper, the customer assistant for AquaCube South Africa (aquacubesa.co.za),",
+    "an online aquarium-supply store. Answer questions about freshwater and marine aquariums,",
+    "lighting, filtration, CO2, heaters, decor, water chemistry, and stocking advice.",
+    "Be concise (under 6 short sentences unless asked for detail). Prices are in ZAR.",
+    "If asked about a specific product, mention searching aquacubesa.co.za. Do not invent stock,",
+    "prices, or product availability. For shipping/payment questions, point the user to the",
+    "store's policies pages. Refuse anything off-topic politely."
+  ].join(' ');
+
+  const toggle = document.getElementById('aquacube-chat-toggle');
+  const panel  = document.getElementById('aquacube-chat-panel');
+  const log    = document.getElementById('aquacube-chat-log');
+  const form   = document.getElementById('aquacube-chat-form');
+  const input  = document.getElementById('aquacube-chat-input');
+  const send   = document.getElementById('aquacube-chat-send');
+
+  const history = []; // {role, content}
+
+  toggle.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) input.focus();
+  });
+
+  function render(role, text) {
+    const div = document.createElement('div');
+    div.className = 'aquacube-msg ' + role;
+    const b = document.createElement('span');
+    b.className = 'bubble';
+    b.textContent = text;
+    div.appendChild(b);
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+    return b;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    send.disabled = true;
+    render('user', msg);
+    history.push({ role: 'user', content: msg });
+    const bubble = render('assistant', '…');
+    try {
+      const res = await fetch(PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: MODEL,
+          max_tokens: 512,
+          system: SYSTEM_PROMPT,
+          messages: history,
+        }),
+      });
+      const data = await res.json();
+      const reply = (data && data.content && data.content[0] && data.content[0].text)
+        || (data && data.error && data.error.message)
+        || 'Sorry, I could not reach the assistant.';
+      bubble.textContent = reply;
+      history.push({ role: 'assistant', content: reply });
+    } catch (err) {
+      bubble.textContent = 'Network error — please try again.';
+    } finally {
+      send.disabled = false;
+      input.focus();
+    }
+  });
+})();
+</script>
