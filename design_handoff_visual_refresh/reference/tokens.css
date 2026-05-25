@@ -1,0 +1,241 @@
+/* ─────────────────────────────────────────────
+   Repti-track design tokens
+   3 themes: terrarium (default) / moonlight / linen
+   Driven by data-theme on :root
+   ───────────────────────────────────────────── */
+
+:root {
+  /* Terrarium — default, refined earthy */
+  --bg: #EFE9D6;
+  --bg-sub: #E5DEC6;
+  --card: #FFFCF4;
+  --card-2: #F7F1E0;
+  --ink: #161A17;
+  --ink-2: #2D332E;
+  --muted: #6F7368;
+  --line: #DDD3B5;
+  --line-strong: #C9BD9B;
+  --moss: #2A5238;
+  --moss-deep: #173321;
+  --moss-soft: #B7C9B9;
+  --amber: #B47A2C;
+  --amber-soft: #E8D5A8;
+  --rust: #A4422E;
+  --bone: #FFFFFF;
+  --ink-on-moss: #F4EFE0;
+  --shadow: 0 1px 0 rgba(23, 51, 33, 0.04), 0 8px 24px -12px rgba(23, 51, 33, 0.18);
+  --shadow-card: 0 1px 2px rgba(23, 51, 33, 0.04), 0 1px 0 rgba(255,255,255,0.6) inset;
+}
+
+:root[data-theme="moonlight"] {
+  --bg: #0E1411;
+  --bg-sub: #161D19;
+  --card: #1A221D;
+  --card-2: #232C26;
+  --ink: #ECE6D2;
+  --ink-2: #C9C3B0;
+  --muted: #8A8F84;
+  --line: #2A3530;
+  --line-strong: #3A4640;
+  --moss: #8AB58F;
+  --moss-deep: #B7D2BA;
+  --moss-soft: #2A3F32;
+  --amber: #D9B370;
+  --amber-soft: #5A4823;
+  --rust: #D97A65;
+  --bone: #ECE6D2;
+  --ink-on-moss: #0E1411;
+  --shadow: 0 1px 0 rgba(0,0,0,0.4), 0 12px 32px -12px rgba(0,0,0,0.6);
+  --shadow-card: 0 1px 0 rgba(255,255,255,0.04) inset;
+}
+
+:root[data-theme="linen"] {
+  --bg: #F6F4EE;
+  --bg-sub: #EEEBE2;
+  --card: #FFFFFF;
+  --card-2: #F8F6EF;
+  --ink: #0A0A0A;
+  --ink-2: #2A2A2A;
+  --muted: #6F6F6A;
+  --line: #E5E2D6;
+  --line-strong: #D2CFBF;
+  --moss: #0A1A14;
+  --moss-deep: #000000;
+  --moss-soft: #DDE3DD;
+  --amber: #7A5A1F;
+  --amber-soft: #ECE2C5;
+  --rust: #8A3A2C;
+  --bone: #FFFFFF;
+  --ink-on-moss: #F6F4EE;
+  --shadow: 0 1px 0 rgba(0,0,0,0.03), 0 8px 24px -16px rgba(0,0,0,0.10);
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+/* Typography ramp */
+:root {
+  --font-display: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  --font-ui: "IBM Plex Sans", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* Reset specific to phone screens */
+.phone-screen, .phone-screen * { box-sizing: border-box; }
+.phone-screen {
+  font-family: var(--font-ui);
+  color: var(--ink);
+  background: var(--bg);
+  height: 100%;
+  font-feature-settings: "ss01", "ss02", "cv11";
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+}
+
+/* Reusable atoms */
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.display-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "ss02", "zero";
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.divider { height: 1px; background: var(--line); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.chip--moss {
+  background: var(--moss);
+  border-color: var(--moss);
+  color: var(--ink-on-moss);
+}
+.chip--amber {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: var(--bone);
+}
+.chip--rust {
+  background: var(--rust);
+  border-color: var(--rust);
+  color: #fff;
+}
+.chip--ghost {
+  background: transparent;
+  color: var(--muted);
+}
+
+/* hide scrollbars where used */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Status pill: due-state */
+.due-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.due-pill--over { background: var(--rust); color: #fff; }
+.due-pill--today { background: var(--amber); color: #fff; }
+.due-pill--soon { background: var(--moss-soft); color: var(--moss-deep); }
+
+/* QR / sticker code mono badge */
+.qr-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: var(--card-2);
+  color: var(--moss);
+  border: 1px solid var(--line);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--font-ui); font-weight: 600; font-size: 14px;
+  border-radius: 12px; padding: 14px 16px; cursor: pointer;
+  border: 1px solid transparent; transition: transform .12s;
+}
+.btn:active { transform: scale(0.98); }
+.btn--primary { background: var(--moss); color: var(--ink-on-moss); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn--danger { background: transparent; color: var(--rust); border-color: var(--rust); }
+
+/* Bottom nav */
+.bottom-nav {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  padding: 10px 14px calc(env(safe-area-inset-bottom, 0px) + 28px);
+  background: linear-gradient(to top, var(--card) 70%, transparent);
+  z-index: 30;
+}
+.bottom-nav__item {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  color: var(--muted); font-size: 10px; font-weight: 500;
+}
+.bottom-nav__item--active { color: var(--moss); }
+.bottom-nav__item--fab {
+  background: var(--moss); color: var(--ink-on-moss);
+  width: 52px; height: 52px; border-radius: 18px;
+  margin-top: -16px; align-self: center;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 18px -6px rgba(42,82,56,0.5), 0 1px 0 rgba(255,255,255,0.15) inset;
+}
+:root[data-theme="moonlight"] .bottom-nav__item--fab {
+  box-shadow: 0 8px 18px -6px rgba(138,181,143,0.4);
+}
+
+/* Header */
+.app-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 20px 12px;
+  background: var(--bg);
+}
+.app-header__title-block { flex: 1; }
+.app-header__icon {
+  width: 36px; height: 36px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--card); border: 1px solid var(--line);
+  color: var(--ink);
+}
