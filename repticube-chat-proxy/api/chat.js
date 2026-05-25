@@ -1,6 +1,14 @@
+const ALLOWED_ORIGINS = new Set([
+  'https://aquacubesa.co.za',
+  'https://www.aquacubesa.co.za',
+]);
+
 export default async function handler(req, res) {
-  // Set CORS headers for ALL requests
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Max-Age', '86400');
@@ -14,7 +22,13 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
-  
+
+  // Reject browser POSTs from origins we don't recognise.
+  // (Server-to-server callers without an Origin header still pass.)
+  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+    return res.status(403).json({ error: 'Forbidden origin' });
+  }
+
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
