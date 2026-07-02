@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>U&amp;G Lifestyle — Homepage Layout Concept</title>
+<meta name="description" content="Sleek, modern homepage layout concept for U&G Lifestyle, luxury linens & home décor since 1980.">
+<style>*{margin:0;padding:0;box-sizing:border-box}</style>
+</head>
+<body>
+<style>
+  :root{
+    --chalk:#F7F4EE; --flax:#E7DECF; --ink:#211E19; --ink-2:#2E2A23;
+    --stone:#6B6355; --stone-2:#8C8375; --line:#D8D0C1; --brass:#9C7C43;
+    --serif:'Hoefler Text','Baskerville Old Face','Big Caslon',Georgia,'Times New Roman',serif;
+    --sans:'Helvetica Neue','Neue Haas Grotesk Display',Helvetica,Arial,system-ui,sans-serif;
+    --wrap:1280px; --gut:clamp(1.25rem,4vw,3.5rem);
+    --eyebrow:.72rem;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--chalk);color:var(--ink);font-family:var(--sans);
+    font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer}
+  ::selection{background:var(--ink);color:var(--chalk)}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.04;
+    letter-spacing:-.012em;text-wrap:balance}
+  p{margin:0}
+  .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+  .eyebrow{font-size:var(--eyebrow);letter-spacing:.24em;text-transform:uppercase;
+    font-weight:600;color:var(--brass)}
+  .muted{color:var(--stone)}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  /* ---- woven linen swatch (stands in for photography) ---- */
+  .swatch{position:relative;overflow:hidden;background-color:var(--sw,var(--flax));
+    background-image:
+      repeating-linear-gradient(90deg,rgba(33,30,25,.045) 0 1px,transparent 1px 3px),
+      repeating-linear-gradient(0deg,rgba(33,30,25,.045) 0 1px,transparent 1px 3px),
+      radial-gradient(130% 120% at 22% 8%,rgba(255,255,255,.4),transparent 58%);
+    background-blend-mode:normal;isolation:isolate}
+  .swatch::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(140% 130% at 80% 110%,rgba(33,30,25,.14),transparent 60%);
+    mix-blend-mode:multiply;pointer-events:none}
+  .swatch .tag{position:absolute;left:.9rem;bottom:.85rem;z-index:2;
+    font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(33,30,25,.5);
+    background:rgba(247,244,238,.7);padding:.32em .6em;border-radius:1px;backdrop-filter:blur(2px)}
+
+  /* ---- announcement ---- */
+  .ann{background:var(--ink);color:var(--chalk);text-align:center;
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:.6rem 1rem}
+  .ann b{color:var(--brass);font-weight:600}
+
+  /* ---- header ---- */
+  header{position:sticky;top:0;z-index:60;transition:background .4s ease,box-shadow .4s ease}
+  header.solid{background:rgba(247,244,238,.86);backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 var(--line)}
+  .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    gap:1rem;padding-block:1.15rem}
+  .nav ul{display:flex;gap:1.8rem;list-style:none;margin:0;padding:0;
+    font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+  .nav ul a{position:relative;padding-block:.4rem}
+  .nav ul a::after{content:"";position:absolute;left:0;bottom:.1rem;height:1px;width:0;
+    background:var(--ink);transition:width .3s ease}
+  .nav ul a:hover::after{width:100%}
+  .brand{justify-self:center;text-align:center;line-height:.9}
+  .brand .mk{font-family:var(--serif);font-size:1.75rem;letter-spacing:.02em}
+  .brand .sub{font-size:.56rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--stone);margin-top:.28rem}
+  .icons{justify-self:end;display:flex;gap:1.35rem;align-items:center;
+    font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+  .icons a{display:inline-flex;align-items:center;gap:.4rem}
+  .cart b{font-variant-numeric:tabular-nums}
+  .burger{display:none;background:none;border:0;color:inherit;font-size:.78rem;
+    letter-spacing:.12em;text-transform:uppercase;padding:.4rem}
+
+  /* ---- hero ---- */
+  .hero{position:relative}
+  .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.5rem,4vw,4rem);
+    align-items:center;min-height:calc(100svh - 96px);padding-block:clamp(2rem,5vw,4rem)}
+  .hero .copy{max-width:34ch}
+  .hero h1{font-size:clamp(2.9rem,7.2vw,6.4rem);margin:1.1rem 0 0}
+  .hero h1 em{font-style:italic;color:var(--brass)}
+  .hero .lede{margin-top:1.6rem;font-size:1.06rem;color:var(--stone);max-width:42ch}
+  .cta-row{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-top:2.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:var(--chalk);
+    padding:.95rem 1.7rem;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;
+    border:1px solid var(--ink);transition:background .25s,color .25s,transform .25s}
+  .btn:hover{background:transparent;color:var(--ink);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--ink)}
+  .link-u{font-size:.8rem;letter-spacing:.06em;border-bottom:1px solid var(--brass);
+    padding-bottom:2px;color:var(--ink)}
+  .hero .art{position:relative;aspect-ratio:4/5;min-height:340px}
+  .hero .art .swatch{position:absolute;inset:0}
+  .price-card{position:absolute;right:-8px;bottom:26px;z-index:3;background:var(--chalk);
+    padding:1rem 1.2rem;box-shadow:0 18px 50px -22px rgba(33,30,25,.55);max-width:210px}
+  .price-card .n{font-family:var(--serif);font-size:1.02rem}
+  .price-card .p{font-size:.82rem;color:var(--stone);margin-top:.15rem}
+  .price-card .add{margin-top:.7rem;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+    display:inline-flex;gap:.5rem;color:var(--brass);border:0;background:none;padding:0}
+  .scroll-cue{position:absolute;left:var(--gut);bottom:1.4rem;font-size:.66rem;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--stone);display:flex;
+    align-items:center;gap:.6rem}
+  .scroll-cue .l{width:44px;height:1px;background:var(--stone-2);position:relative;overflow:hidden}
+  .scroll-cue .l::after{content:"";position:absolute;inset:0;background:var(--ink);
+    animation:slide 2.4s ease-in-out infinite}
+  @keyframes slide{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+  /* ---- marquee ---- */
+  .strip{border-block:1px solid var(--line);overflow:hidden;background:var(--flax)}
+  .marquee{display:flex;gap:0;white-space:nowrap;width:max-content;
+    animation:march 34s linear infinite}
+  .marquee span{padding:.95rem 2.4rem;font-size:.72rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-2);display:inline-flex;gap:2.4rem;align-items:center}
+  .marquee span::after{content:"✦";color:var(--brass);font-size:.7rem}
+  @keyframes march{to{transform:translateX(-50%)}}
+
+  /* ---- section head ---- */
+  .sec{padding-block:clamp(3.5rem,7vw,6.5rem)}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;
+    margin-bottom:2.6rem;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(1.9rem,3.8vw,3rem);max-width:16ch}
+  .sec-head .k{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--stone);
+    display:flex;gap:.7rem;align-items:center;white-space:nowrap}
+  .sec-head .k::before{content:"";width:34px;height:1px;background:var(--brass)}
+
+  /* ---- category grid ---- */
+  .cats{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(.7rem,1.4vw,1.1rem)}
+  .cat{position:relative;display:block;text-decoration:none}
+  .cat .swatch{aspect-ratio:3/4}
+  .cat.wide{grid-column:span 3} .cat.wide .swatch{aspect-ratio:16/10}
+  .cat.tall{grid-column:span 3} .cat.tall .swatch{aspect-ratio:16/10}
+  .cat.sm{grid-column:span 2}
+  .cat .meta{display:flex;justify-content:space-between;align-items:baseline;
+    margin-top:.85rem;gap:1rem}
+  .cat .meta .nm{font-family:var(--serif);font-size:1.18rem}
+  .cat .meta .ct{font-size:.72rem;letter-spacing:.08em;color:var(--stone);
+    font-variant-numeric:tabular-nums}
+  .cat .swatch{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .cat:hover .swatch{transform:scale(1.03)}
+  .cat .go{position:absolute;top:.9rem;right:.9rem;z-index:2;width:34px;height:34px;
+    border-radius:50%;background:var(--chalk);display:grid;place-items:center;font-size:.8rem;
+    opacity:0;transform:translateY(-4px);transition:.35s}
+  .cat:hover .go{opacity:1;transform:none}
+
+  /* ---- feature dark band ---- */
+  .feat{background:var(--ink);color:var(--chalk)}
+  .feat .in{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4.5rem);
+    align-items:center;padding-block:clamp(3.5rem,6vw,6rem)}
+  .feat .art{aspect-ratio:5/6;position:relative}
+  .feat .art .swatch{position:absolute;inset:0}
+  .feat h2{font-size:clamp(2.1rem,4.4vw,3.6rem);color:var(--chalk);margin-top:1rem}
+  .feat h2 em{font-style:italic;color:#D9BE8B}
+  .feat p{color:rgba(247,244,238,.72);margin-top:1.3rem;max-width:42ch}
+  .feat .eyebrow{color:#D9BE8B}
+  .feat .btn{background:var(--chalk);color:var(--ink);border-color:var(--chalk);margin-top:2rem}
+  .feat .btn:hover{background:transparent;color:var(--chalk)}
+  .feat .specs{display:flex;gap:2.4rem;margin-top:2.4rem;flex-wrap:wrap}
+  .feat .specs div{border-left:1px solid rgba(217,190,139,.4);padding-left:1rem}
+  .feat .specs .v{font-family:var(--serif);font-size:1.7rem}
+  .feat .specs .t{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(247,244,238,.55);margin-top:.2rem}
+
+  /* ---- product rail ---- */
+  .rail{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.9rem,1.6vw,1.5rem)}
+  .prod .swatch{aspect-ratio:1;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .prod{position:relative}
+  .prod:hover .swatch{transform:scale(1.03)}
+  .prod .fav{position:absolute;top:.8rem;right:.8rem;z-index:2;border:0;background:rgba(247,244,238,.8);
+    width:32px;height:32px;border-radius:50%;font-size:.85rem;display:grid;place-items:center}
+  .prod .add{position:absolute;left:0;right:0;bottom:0;z-index:2;background:var(--ink);color:var(--chalk);
+    border:0;padding:.85rem;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+    transform:translateY(100%);transition:transform .3s ease;opacity:0}
+  .prod .imgwrap{position:relative;overflow:hidden}
+  .prod:hover .add{transform:none;opacity:1}
+  .prod .nm{font-family:var(--serif);font-size:1.12rem;margin-top:.9rem}
+  .prod .cat-l{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);
+    margin-top:.7rem}
+  .prod .p{margin-top:.35rem;font-size:.92rem;font-variant-numeric:tabular-nums}
+  .prod .p s{color:var(--stone-2);margin-right:.5rem}
+
+  /* ---- story ---- */
+  .story .in{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(1.5rem,4vw,4rem);
+    align-items:center}
+  .story .art{aspect-ratio:4/5;position:relative}
+  .story .art .swatch{position:absolute;inset:0}
+  .story h2{font-size:clamp(2rem,4vw,3.2rem);margin-top:1rem}
+  .story p{color:var(--stone);margin-top:1.4rem;max-width:52ch}
+  .story .stats{display:flex;gap:2.6rem;margin-top:2.4rem;flex-wrap:wrap}
+  .story .stats .v{font-family:var(--serif);font-size:2.2rem}
+  .story .stats .t{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--stone);margin-top:.15rem}
+
+  /* ---- lookbook scroll ---- */
+  .look .scr{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,26vw);
+    gap:1.1rem;overflow-x:auto;padding-bottom:1rem;scroll-snap-type:x mandatory}
+  .look .scr::-webkit-scrollbar{height:5px}
+  .look .scr::-webkit-scrollbar-thumb{background:var(--line)}
+  .look .item{scroll-snap-align:start}
+  .look .swatch{aspect-ratio:3/4}
+  .look .item .nm{font-family:var(--serif);font-size:1.1rem;margin-top:.8rem}
+  .look .item .t{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);
+    margin-top:.3rem}
+
+  /* ---- insta ---- */
+  .insta{border-top:1px solid var(--line)}
+  .insta .g{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem}
+  .insta .swatch{aspect-ratio:1;transition:filter .4s}
+  .insta a{position:relative}
+  .insta a:hover .swatch{filter:brightness(.9)}
+  .insta a::after{content:"◎";position:absolute;inset:0;display:grid;place-items:center;
+    color:var(--chalk);opacity:0;transition:.3s;font-size:1.2rem}
+  .insta a:hover::after{opacity:1}
+
+  /* ---- newsletter ---- */
+  .news{background:var(--flax);border-block:1px solid var(--line)}
+  .news .in{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;
+    padding-block:clamp(3rem,5vw,4.5rem)}
+  .news h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+  .news p{color:var(--stone);margin-top:.9rem;max-width:40ch}
+  .news form{display:flex;gap:.7rem;max-width:440px;justify-self:end;width:100%;flex-wrap:wrap}
+  .news input{flex:1;min-width:200px;border:1px solid var(--stone-2);background:transparent;
+    padding:.95rem 1rem;font-family:inherit;font-size:.9rem;color:var(--ink)}
+  .news input::placeholder{color:var(--stone-2)}
+  .news input:focus{outline:2px solid var(--brass);outline-offset:2px}
+
+  /* ---- footer ---- */
+  footer{background:var(--ink);color:rgba(247,244,238,.72);padding-block:clamp(3rem,5vw,4.5rem)}
+  .fmk{font-family:var(--serif);font-size:clamp(3rem,10vw,7rem);line-height:.9;color:var(--chalk);
+    letter-spacing:.01em;border-bottom:1px solid rgba(247,244,238,.16);padding-bottom:1.6rem}
+  .fmk .sub{font-family:var(--sans);font-size:.62rem;letter-spacing:.4em;color:rgba(247,244,238,.55);
+    display:block;margin-top:.6rem;text-transform:uppercase}
+  .fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2rem;margin-top:2.8rem}
+  .fcol h4{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--chalk);
+    margin:0 0 1rem;font-family:var(--sans);font-weight:600}
+  .fcol ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.7rem;
+    font-size:.86rem}
+  .fcol a:hover{color:var(--chalk)}
+  .fcol .addr{font-size:.86rem;line-height:1.5}
+  .fcol .addr b{color:var(--chalk);font-weight:600;letter-spacing:.02em}
+  .fbot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:2.8rem;
+    padding-top:1.6rem;border-top:1px solid rgba(247,244,238,.16);
+    font-size:.72rem;letter-spacing:.06em;color:rgba(247,244,238,.5)}
+  .pay{display:flex;gap:.5rem}
+  .pay span{border:1px solid rgba(247,244,238,.25);padding:.25em .55em;border-radius:2px;
+    font-size:.6rem;letter-spacing:.1em;text-transform:uppercase}
+
+  /* ---- reveal ---- */
+  .rise{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rise.in{opacity:1;transform:none}
+
+  /* ---- responsive ---- */
+  @media(max-width:960px){
+    .nav{grid-template-columns:auto 1fr auto}
+    .nav ul,.icons a span.hide{display:none}
+    .burger{display:inline-block}
+    .brand{justify-self:start}
+    .hero .grid{grid-template-columns:1fr;min-height:auto}
+    .hero .art{order:-1;aspect-ratio:16/11}
+    .cats{grid-template-columns:repeat(4,1fr)}
+    .cat.wide,.cat.tall{grid-column:span 4}.cat.sm{grid-column:span 2}
+    .cat:not(.wide):not(.tall):not(.sm){grid-column:span 2}
+    .feat .in,.story .in,.news .in{grid-template-columns:1fr}
+    .news form{justify-self:start}
+    .rail{grid-template-columns:repeat(2,1fr)}
+    .insta .g{grid-template-columns:repeat(3,1fr)}
+    .fcols{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){
+    .cats{grid-template-columns:repeat(2,1fr)}
+    .cat.wide,.cat.tall,.cat.sm,.cat{grid-column:span 2}
+    .fcols{grid-template-columns:1fr}
+    .story .stats,.feat .specs{gap:1.6rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .rise{opacity:1;transform:none}
+  }
+</style>
+
+<div class="ann">Complimentary delivery across South Africa &nbsp;·&nbsp; <b>Est. Durban, 1980</b> &nbsp;·&nbsp; Showrooms in Durban · Johannesburg · Cape Town</div>
+
+<header id="hdr">
+  <div class="wrap">
+    <nav class="nav">
+      <ul>
+        <li><a href="#cats">Bedroom</a></li>
+        <li><a href="#cats">Bath</a></li>
+        <li><a href="#cats">Décor</a></li>
+        <li><a href="#look">Wallpaper</a></li>
+      </ul>
+      <a class="brand" href="#top" aria-label="U&amp;G Lifestyle home">
+        <div class="mk">U&amp;G</div>
+        <div class="sub">Lifestyle</div>
+      </a>
+      <div class="icons">
+        <a href="#"><span class="hide">Search</span> ⌕</a>
+        <a href="#"><span class="hide">Account</span> ⊙</a>
+        <a class="cart" href="#">Cart&nbsp;(<b id="cc">0</b>)</a>
+      </div>
+      <button class="burger" aria-label="Menu">Menu</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="grid">
+        <div class="copy rise">
+          <div class="eyebrow">Luxury linens &amp; home décor · since 1980</div>
+          <h1>The art of<br>the <em>well-made</em> bed.</h1>
+          <p class="lede">Hospitality-grade textiles, forty-five years in the making — from crisp Egyptian-cotton percale to the softest towels, curtains and cushions.</p>
+          <div class="cta-row">
+            <a class="btn" href="#cats">Shop bed linen <span aria-hidden="true">→</span></a>
+            <a class="link-u" href="#feat">Discover Egyptian cotton</a>
+          </div>
+        </div>
+        <div class="art rise">
+          <div class="swatch" style="--sw:#D9CDB8"><span class="tag">Hero · Sateen bedding</span></div>
+          <div class="price-card">
+            <div class="n">Amara 600TC Duvet Set</div>
+            <div class="p tnum">Egyptian cotton · from R 2,890</div>
+            <button class="add" id="heroAdd">Add to cart <span aria-hidden="true">＋</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span class="l"></span>Scroll to explore</div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="strip" aria-hidden="true">
+    <div class="marquee">
+      <span>45 Years of Craft</span><span>Egyptian Cotton</span><span>Hospitality Grade</span><span>Free SA Delivery</span><span>Made for South African Homes</span><span>Percale &amp; Sateen</span>
+      <span>45 Years of Craft</span><span>Egyptian Cotton</span><span>Hospitality Grade</span><span>Free SA Delivery</span><span>Made for South African Homes</span><span>Percale &amp; Sateen</span>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section class="sec" id="cats">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <h2>Everything for a<br>considered home.</h2>
+        <div class="k">Shop by category</div>
+      </div>
+      <div class="cats">
+        <a class="cat wide rise" href="#">
+          <div class="imgwrap"><div class="swatch" style="--sw:#D8C7AC"><span class="tag">Bedroom</span></div></div>
+          <span class="go" aria-hidden="true">↗</span>
+          <div class="meta"><span class="nm">Bedroom &amp; Bed Linen</span><span class="ct tnum">1,818 pieces</span></div>
+        </a>
+        <a class="cat tall rise" href="#">
+          <div class="imgwrap"><div class="swatch" style="--sw:#AEB6B4"><span class="tag">Bathroom</span></div></div>
+          <span class="go" aria-hidden="true">↗</span>
+          <div class="meta"><span class="nm">Bathroom &amp; Towels</span><span class="ct tnum">55 pieces</span></div>
+        </a>
+        <a class="cat sm rise" href="#">
+          <div class="imgwrap"><div class="swatch" style="--sw:#C9A990"><span class="tag">Décor</span></div></div>
+          <span class="go" aria-hidden="true">↗</span>
+          <div class="meta"><span class="nm">Home Décor</span><span class="ct tnum">297 pieces</span></div>
+        </a>
+        <a class="cat sm rise" href="#">
+          <div class="imgwrap"><div class="swatch" style="--sw:#B9BCA6"><span class="tag">Curtains</span></div></div>
+          <span class="go" aria-hidden="true">↗</span>
+          <div class="meta"><span class="nm">Ready-made Curtains</span><span class="ct">Made to hang</span></div>
+        </a>
+        <a class="cat sm rise" href="#">
+          <div class="imgwrap"><div class="swatch" style="--sw:#9E8896"><span class="tag">Scatters</span></div></div>
+          <span class="go" aria-hidden="true">↗</span>
+          <div class="meta"><span class="nm">Scatter Cushions</span><span class="ct">The finishing touch</span></div>
+        </a>
+        <a class="cat sm rise" href="#">
+          <div class="imgwrap"><div class="swatch" style="--sw:#C7B48E"><span class="tag">Rugs</span></div></div>
+          <span class="go" aria-hidden="true">↗</span>
+          <div class="meta"><span class="nm">Rugs &amp; Floor</span><span class="ct">Underfoot luxury</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE / EGYPTIAN COTTON -->
+  <section class="feat" id="feat">
+    <div class="wrap">
+      <div class="in">
+        <div class="art rise">
+          <div class="swatch" style="--sw:#5D5648"><span class="tag" style="background:rgba(247,244,238,.55)">600 Thread Count</span></div>
+        </div>
+        <div class="rise">
+          <div class="eyebrow">The Egyptian Cotton Collection</div>
+          <h2>The sheets the<br><em>hotels</em> hope you<br>never leave.</h2>
+          <p>Long-staple Egyptian cotton, woven to a 600-thread-count sateen that only grows softer with every wash. It's the standard we set for the country's finest hotels — now made for your own bedroom.</p>
+          <div class="specs">
+            <div><div class="v tnum">600</div><div class="t">Thread count</div></div>
+            <div><div class="v">100%</div><div class="t">Egyptian cotton</div></div>
+            <div><div class="v tnum">12</div><div class="t">Colourways</div></div>
+          </div>
+          <a class="btn" href="#">Shop the collection <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW ARRIVALS -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <h2>New this season.</h2>
+        <div class="k">Just arrived</div>
+      </div>
+      <div class="rail">
+        <div class="prod rise">
+          <div class="imgwrap">
+            <div class="swatch" style="--sw:#D9CDB8"><span class="tag">Bed linen</span></div>
+            <button class="fav" aria-label="Save">♡</button>
+            <button class="add prodAdd">Add to cart</button>
+          </div>
+          <div class="cat-l">Bedroom</div>
+          <div class="nm">Amara Sateen Duvet Set</div>
+          <div class="p tnum">R 2,890</div>
+        </div>
+        <div class="prod rise">
+          <div class="imgwrap">
+            <div class="swatch" style="--sw:#AEB6B4"><span class="tag">Towels</span></div>
+            <button class="fav" aria-label="Save">♡</button>
+            <button class="add prodAdd">Add to cart</button>
+          </div>
+          <div class="cat-l">Bathroom</div>
+          <div class="nm">Cloud Loop Bath Towel</div>
+          <div class="p tnum"><s>R 549</s> R 429</div>
+        </div>
+        <div class="prod rise">
+          <div class="imgwrap">
+            <div class="swatch" style="--sw:#9E8896"><span class="tag">Cushion</span></div>
+            <button class="fav" aria-label="Save">♡</button>
+            <button class="add prodAdd">Add to cart</button>
+          </div>
+          <div class="cat-l">Décor</div>
+          <div class="nm">Linen Scatter · Plum</div>
+          <div class="p tnum">R 690</div>
+        </div>
+        <div class="prod rise">
+          <div class="imgwrap">
+            <div class="swatch" style="--sw:#C7B48E"><span class="tag">Throw</span></div>
+            <button class="fav" aria-label="Save">♡</button>
+            <button class="add prodAdd">Add to cart</button>
+          </div>
+          <div class="cat-l">Bedroom</div>
+          <div class="nm">Mohair-blend Throw</div>
+          <div class="p tnum">R 1,499</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="sec story">
+    <div class="wrap">
+      <div class="in">
+        <div class="art rise">
+          <div class="swatch" style="--sw:#BAAF98"><span class="tag">Our story</span></div>
+        </div>
+        <div class="rise">
+          <div class="eyebrow">Family-owned since 1980</div>
+          <h2>From a Durban<br>fabric store to<br>the nation's homes.</h2>
+          <p>We began in 1980 as a modest, family-run fabric store on a Durban high street. Forty-five years on, we dress the beds, bathrooms and windows of homes and hospitality across South Africa — with the same eye for cloth, colour and craft we started with.</p>
+          <div class="stats">
+            <div><div class="v tnum">45</div><div class="t">Years of craft</div></div>
+            <div><div class="v tnum">3</div><div class="t">Showrooms</div></div>
+            <div><div class="v">SA</div><div class="t">Made &amp; loved</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOKBOOK -->
+  <section class="sec look" id="look">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <h2>Wallpaper, on the wall.</h2>
+        <div class="k">Lookbook · 7 collections</div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="scr">
+        <div class="item rise"><div class="swatch" style="--sw:#B9BCA6"><span class="tag">Pattern</span></div><div class="nm">Blooming Garden</div><div class="t">Botanical</div></div>
+        <div class="item rise"><div class="swatch" style="--sw:#C9A990"><span class="tag">Pattern</span></div><div class="nm">Eterna</div><div class="t">Textural neutrals</div></div>
+        <div class="item rise"><div class="swatch" style="--sw:#9E8896"><span class="tag">Pattern</span></div><div class="nm">Flora</div><div class="t">Painterly floral</div></div>
+        <div class="item rise"><div class="swatch" style="--sw:#7E8894"><span class="tag">Pattern</span></div><div class="nm">Moderna</div><div class="t">Geometric</div></div>
+        <div class="item rise"><div class="swatch" style="--sw:#C7B48E"><span class="tag">Pattern</span></div><div class="nm">Polished</div><div class="t">Metallic sheen</div></div>
+        <div class="item rise"><div class="swatch" style="--sw:#8C8375"><span class="tag">Pattern</span></div><div class="nm">Trilogy</div><div class="t">Tonal stripe</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="sec insta">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <h2>At home with U&amp;G.</h2>
+        <div class="k">@uglifestyle_</div>
+      </div>
+      <div class="g">
+        <a href="#" class="rise"><div class="swatch" style="--sw:#D8C7AC"></div></a>
+        <a href="#" class="rise"><div class="swatch" style="--sw:#AEB6B4"></div></a>
+        <a href="#" class="rise"><div class="swatch" style="--sw:#9E8896"></div></a>
+        <a href="#" class="rise"><div class="swatch" style="--sw:#C7B48E"></div></a>
+        <a href="#" class="rise"><div class="swatch" style="--sw:#B9BCA6"></div></a>
+        <a href="#" class="rise"><div class="swatch" style="--sw:#C9A990"></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="news">
+    <div class="wrap">
+      <div class="in">
+        <div class="rise">
+          <div class="eyebrow">Join the list</div>
+          <h2>Ten percent on your first order.</h2>
+          <p>Early access to new collections, styling notes and members-only offers — direct to your inbox.</p>
+        </div>
+        <form class="rise" id="nlForm">
+          <input type="email" placeholder="Your email address" aria-label="Email address" required>
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fmk">U&amp;G<span class="sub">Lifestyle · Luxury Linens &amp; Home Décor</span></div>
+    <div class="fcols">
+      <div class="fcol">
+        <h4>Showrooms</h4>
+        <p class="addr"><b>Durban</b><br>Umgeni Business Park<br>Mon–Fri 9–5 · Sat 9–1</p>
+        <p class="addr" style="margin-top:1rem"><b>Johannesburg</b> · <b>Cape Town</b><br>Visit in-store to see samples.</p>
+      </div>
+      <div class="fcol">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">Bed Linen</a></li>
+          <li><a href="#">Egyptian Cotton</a></li>
+          <li><a href="#">Towels</a></li>
+          <li><a href="#">Curtains</a></li>
+          <li><a href="#">Wallpaper</a></li>
+          <li><a href="#">Rugs &amp; Scatters</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Delivery &amp; Returns</a></li>
+          <li><a href="#">Care Guide</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Trade &amp; Hospitality</a></li>
+          <li><a href="#">Store Locator</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 1980–2026 U&amp;G Lifestyle. Free delivery across South Africa.</span>
+      <div class="pay"><span>Visa</span><span>Mastercard</span><span>EFT</span><span>PayFast</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var hdr=document.getElementById('hdr');
+    var onScroll=function(){ hdr.classList.toggle('solid', window.scrollY>40); };
+    onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+
+    // reveal
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+      },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+      document.querySelectorAll('.rise').forEach(function(el){io.observe(el);});
+    } else {
+      document.querySelectorAll('.rise').forEach(function(el){el.classList.add('in');});
+    }
+
+    // cart
+    var cc=document.getElementById('cc');
+    function bump(){ cc.textContent=(parseInt(cc.textContent,10)||0)+1; }
+    document.getElementById('heroAdd').addEventListener('click',bump);
+    document.querySelectorAll('.prodAdd').forEach(function(b){b.addEventListener('click',bump);});
+    document.querySelectorAll('.fav').forEach(function(b){
+      b.addEventListener('click',function(){ b.textContent = b.textContent.trim()==='♡'?'♥':'♡'; });
+    });
+
+    document.getElementById('nlForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      var i=e.target.querySelector('input'), btn=e.target.querySelector('button');
+      if(i.value){ btn.textContent='Subscribed ✓'; i.disabled=true; }
+    });
+  })();
+</script>
+</body>
+</html>
