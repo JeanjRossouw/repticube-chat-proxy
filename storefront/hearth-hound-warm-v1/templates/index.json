@@ -416,7 +416,12 @@
         "media": {
           "type": "_media-without-appearance",
           "static": true,
-          "name": "Product media"
+          "name": "Product media",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/Huntlea-Suburban-Bolster-Dog-Bed-164906546.jpg",
+            "image_position": "cover"
+          }
         },
         "featured-product": {
           "type": "_featured-product",
