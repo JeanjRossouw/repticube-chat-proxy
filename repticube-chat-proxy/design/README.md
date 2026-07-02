@@ -9,6 +9,10 @@ no build step, dependencies, or network calls:
 - [`design/index.html`](./index.html) — the homepage layout
 - [`design/shop.html`](./shop.html) — the **Shop All** products page (filterable product
   grid, sort, quick view)
+- [`design/scatters.html`](./scatters.html) — **Willow Retreat** scatter cushion range (real
+  catalogue photos & pricing: 12 designs, 60×60 cm, R360)
+- [`design/rugs.html`](./rugs.html) — **Aegean Threads** rug range (real catalogue designs,
+  colourways & sizes: 12 designs, 18 colourways)
 
 ## The shop / products page
 
