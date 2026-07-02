@@ -60,7 +60,7 @@
       "name": "Hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/July_2025-19.jpg",
+        "image_1": "shopify://shop_images/KolettoQueen-Lifestyle1.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
@@ -87,7 +87,8 @@
         "blurred_reflection": false,
         "reflection_opacity": 75,
         "padding-block-start": 100,
-        "padding-block-end": 64
+        "padding-block-end": 64,
+        "image_2": "shopify://shop_images/KolettoAllSeason-Lifestyle1.png"
       }
     },
     "shop_by_range": {
@@ -867,11 +868,110 @@
         "section_width": "full-width",
         "section_height": "auto",
         "color_scheme": "scheme-4",
-        "background_media": "none",
+        "background_media": "image",
         "border": "none",
-        "toggle_overlay": false,
+        "toggle_overlay": true,
         "padding-block-start": 80,
-        "padding-block-end": 88
+        "padding-block-end": 88,
+        "background_image": "shopify://shop_images/July_2025-15.jpg",
+        "background_image_position": "cover",
+        "overlay_color": "#1F2A44D9",
+        "overlay_style": "solid"
+      }
+    },
+    "outdoor_story": {
+      "type": "media-with-content",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
+          "name": "Image",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/KalahariKing-Lifestyle1.png",
+            "image_position": "cover"
+          }
+        },
+        "content": {
+          "type": "_content-without-appearance",
+          "static": true,
+          "name": "Content",
+          "settings": {
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 20
+          },
+          "blocks": {
+            "story_eyebrow": {
+              "type": "text",
+              "name": "Eyebrow",
+              "settings": {
+                "text": "<h6>Built for the outdoors</h6>",
+                "width": "fit-content",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.75rem",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "color": "var(--color-primary)"
+              },
+              "blocks": {}
+            },
+            "story_heading": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h2>Sun, stoep and muddy paws</h2>",
+                "width": "fit-content",
+                "type_preset": "h2",
+                "font": "var(--font-heading--family)",
+                "color": "var(--color-foreground-heading)"
+              },
+              "blocks": {}
+            },
+            "story_text": {
+              "type": "text",
+              "name": "Story",
+              "settings": {
+                "text": "<p>Kalahari and Original beds are cut from waterproof, UV-resistant Riptec — antifungal, hose-off tough, and stitched to outlast the dogs who really live outside. Drag it to the stoep, the bakkie or the garden; it comes back looking like itself.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            },
+            "story_cta": {
+              "type": "button",
+              "name": "Button",
+              "settings": {
+                "label": "Shop Kalahari",
+                "link": "shopify://collections/kalahari",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "width": "fit-content",
+                "width_mobile": "fit-content"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "story_eyebrow",
+            "story_heading",
+            "story_text",
+            "story_cta"
+          ]
+        }
+      },
+      "name": "Outdoor story",
+      "settings": {
+        "media_position": "right",
+        "section_width": "page-width",
+        "extend_media": false,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     }
   },
@@ -882,6 +982,7 @@
     "featured_spotlight",
     "trust_bar",
     "brand_story",
+    "outdoor_story",
     "newsletter"
   ]
 }
