@@ -106,7 +106,19 @@
     .burger{display:inline-block}.brand{justify-self:start}}
   @media(max-width:680px){.g4,.g3{grid-template-columns:repeat(2,1fr)}}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card{opacity:1;transform:none}}
-</style></head><body><div class="ann">Complimentary delivery across South Africa &nbsp;·&nbsp; <b>Est. Durban, 1980</b> &nbsp;·&nbsp; Showrooms in Durban · Johannesburg · Cape Town</div>
+</style><style id="mnav-css">
+.mnav{position:fixed;inset:0;background:rgba(28,25,21,.45);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s;z-index:300}
+.mnav.open{opacity:1;visibility:visible}
+.mnav-in{position:absolute;top:0;right:0;height:100%;width:min(86vw,370px);background:#f7f3ec;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4.6rem 1.7rem 2.4rem;transform:translateX(100%);transition:transform .3s ease;box-shadow:-24px 0 60px -24px rgba(0,0,0,.45)}
+.mnav.open .mnav-in{transform:none}
+.mnav-x{position:absolute;top:1rem;right:1.2rem;background:none;border:0;font-size:2rem;line-height:1;color:#211e19;padding:.2rem .45rem}
+.mgrp{border-bottom:1px solid #e7e0d4;padding:.15rem 0}
+.mgrp .mtop{display:block;padding:.9rem 0;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;color:#211e19;font-weight:600;text-decoration:none}
+.mgrp .msub{display:flex;flex-direction:column;padding:0 0 .7rem .1rem}
+.mgrp .msub a{padding:.42rem 0;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#8a7f6f;text-decoration:none}
+.mgrp .msub a:active{color:#211e19}
+</style>
+</head><body><div class="ann">Complimentary delivery across South Africa &nbsp;·&nbsp; <b>Est. Durban, 1980</b> &nbsp;·&nbsp; Showrooms in Durban · Johannesburg · Cape Town</div>
 <header><div class="wrap"><nav class="nav">
   <ul>
     <li><a href="shop.html">Bedroom</a><div class="menu"><a href="shop.html">Bedroom Linen</a><a href="shop.html">Duvet &amp; Pillow Inners</a><a href="shop.html">Mattress &amp; Pillow Protector</a><a href="shop.html">Sheets</a><a href="shop.html">Pillowcase</a></div></li>
@@ -182,4 +194,42 @@
 <script>(function(){var cc=document.getElementById('cc');function bump(){cc.textContent=(parseInt(cc.textContent,10)||0)+1;}
 document.querySelectorAll('.add,.enq').forEach(function(b){b.addEventListener('click',bump);});
 document.querySelectorAll('.fav').forEach(function(b){b.addEventListener('click',function(){b.textContent=b.textContent.trim()==='♡'?'♥':'♡';});});
-document.querySelectorAll('.card').forEach(function(c,i){c.style.animationDelay=(Math.min(i,11)*28)+'ms';});})();</script></body></html>
+document.querySelectorAll('.card').forEach(function(c,i){c.style.animationDelay=(Math.min(i,11)*28)+'ms';});})();</script><script id="mnav-js">
+(function(){
+  var burger=document.querySelector('.burger');
+  var navul=document.querySelector('.nav ul');
+  if(!burger||!navul) return;
+  var ov=document.createElement('div'); ov.className='mnav';
+  var panel=document.createElement('div'); panel.className='mnav-in';
+  var x=document.createElement('button'); x.className='mnav-x'; x.setAttribute('aria-label','Close menu'); x.innerHTML='&times;';
+  panel.appendChild(x);
+  var items=navul.children;
+  for(var i=0;i<items.length;i++){
+    var li=items[i];
+    var topA=li.querySelector('a'); if(!topA) continue;
+    var grp=document.createElement('div'); grp.className='mgrp';
+    var t=document.createElement('a'); t.href=topA.getAttribute('href')||'#'; t.className='mtop'; t.textContent=(topA.textContent||'').trim();
+    grp.appendChild(t);
+    var subs=li.querySelectorAll('.menu a');
+    if(subs.length){
+      var sub=document.createElement('div'); sub.className='msub';
+      for(var j=0;j<subs.length;j++){
+        var s=document.createElement('a'); s.href=subs[j].getAttribute('href')||'#'; s.textContent=(subs[j].textContent||'').trim();
+        sub.appendChild(s);
+      }
+      grp.appendChild(sub);
+    }
+    panel.appendChild(grp);
+  }
+  ov.appendChild(panel);
+  document.body.appendChild(ov);
+  function close(){ov.classList.remove('open');document.documentElement.style.overflow='';}
+  function open(){ov.classList.add('open');document.documentElement.style.overflow='hidden';}
+  burger.addEventListener('click',function(e){e.preventDefault();ov.classList.contains('open')?close():open();});
+  x.addEventListener('click',close);
+  ov.addEventListener('click',function(e){if(e.target===ov)close();});
+  var links=panel.querySelectorAll('a');
+  for(var k=0;k<links.length;k++){links[k].addEventListener('click',close);}
+})();
+</script>
+</body></html>
