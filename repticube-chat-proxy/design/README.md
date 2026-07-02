@@ -28,10 +28,29 @@ wallpaper lookbook → Instagram strip → newsletter → footer with the three 
 Includes tasteful motion (scroll reveals, hover states, marquee) that respects
 `prefers-reduced-motion`, and is fully responsive down to mobile.
 
-## Notes for handoff
+## Applying real U&G branding
 
-- Replace `.swatch` blocks with real imagery (`<img>` / `<picture>`), keeping the aspect
-  ratios already set on each slot.
-- Fonts use system stacks so the file stays dependency-free; swap in the brand's licensed
-  display + body faces via `@font-face` when wiring into the real site.
-- Copy, product names, prices and showroom details are illustrative placeholders.
+The layout is built to be rebranded from **one place**. Open `index.html` and find the
+`U&G LIFESTYLE — BRAND TOKENS` block at the top of the `<style>`:
+
+1. **Colours** — replace the six placeholder hex values (`--chalk`, `--flax`, `--ink`,
+   `--stone`, `--line`, `--brass`) with U&G's real palette. Every colour on the page
+   derives from these, so this recolours the whole site.
+2. **Fonts** — uncomment the `@font-face` scaffolding, point it at U&G's licensed WOFF2
+   files (self-hosted or inlined as `data:` URIs), and the family names are already wired
+   into `--serif` / `--sans` (`'UG Display'`, `'UG Sans'`). Fallback stacks stay in place.
+3. **Photography** — each image slot is a `<div class="swatch">` (a CSS-woven placeholder).
+   Replace it with real imagery and keep the parent's aspect ratio:
+   ```html
+   <img src="/img/amara-duvet.jpg" alt="Amara sateen duvet set" class="ph" loading="lazy">
+   ```
+   The `.ph` helper (`object-fit:cover`) makes any image fill its slot cleanly.
+
+Copy, product names, prices and showroom details are illustrative placeholders — swap for
+real catalogue content.
+
+### What to hand over for a full-fidelity pass
+
+To wire in true branding I'll need: U&G's **hex palette** (or logo/brand-guide),
+the **display + body fonts** (WOFF2 or names if it's a Google/Adobe font), the **logo**
+(SVG preferred), and a set of **product / lifestyle photos**.
