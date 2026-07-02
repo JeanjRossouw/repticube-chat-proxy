@@ -36,9 +36,10 @@ The layout is built to be rebranded from **one place**. Open `index.html` and fi
 1. **Colours** — replace the six placeholder hex values (`--chalk`, `--flax`, `--ink`,
    `--stone`, `--line`, `--brass`) with U&G's real palette. Every colour on the page
    derives from these, so this recolours the whole site.
-2. **Fonts** — uncomment the `@font-face` scaffolding, point it at U&G's licensed WOFF2
-   files (self-hosted or inlined as `data:` URIs), and the family names are already wired
-   into `--serif` / `--sans` (`'UG Display'`, `'UG Sans'`). Fallback stacks stay in place.
+2. **Fonts** — **Fraunces** (display) and **Jost** (body) are embedded directly in the file
+   as base64 `@font-face` data (families `'UG Display'` / `'UG Sans'`), so it renders
+   identically anywhere with no network calls. To use U&G's own licensed faces, replace
+   those `data:` URIs with the real WOFF2 — the family names and fallbacks stay as-is.
 3. **Photography** — each image slot is a `<div class="swatch">` (a CSS-woven placeholder).
    Replace it with real imagery and keep the parent's aspect ratio:
    ```html
