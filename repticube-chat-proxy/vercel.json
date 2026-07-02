@@ -4,5 +4,17 @@
       "memory": 1024,
       "maxDuration": 30
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/design/index.html" },
+    { "source": "/index.html", "destination": "/design/index.html" },
+    { "source": "/shop.html", "destination": "/design/shop.html" },
+    { "source": "/scatters.html", "destination": "/design/scatters.html" },
+    { "source": "/rugs.html", "destination": "/design/rugs.html" },
+    { "source": "/preview.html", "destination": "/design/preview.html" },
+    { "source": "/shop", "destination": "/design/shop.html" },
+    { "source": "/scatters", "destination": "/design/scatters.html" },
+    { "source": "/rugs", "destination": "/design/rugs.html" },
+    { "source": "/preview", "destination": "/design/preview.html" }
+  ]
 }
