@@ -3,8 +3,26 @@
 A sleek, modern homepage layout concept for **U&G Lifestyle** (uglifestyle.com) —
 South Africa's luxury linens & home décor house, family-owned since 1980.
 
-**View it:** open [`design/index.html`](./index.html) in any browser. It's a single,
-self-contained file — no build step, no dependencies, no network calls.
+**View it:** open the pages in any browser — each is a single, self-contained file with
+no build step, dependencies, or network calls:
+
+- [`design/index.html`](./index.html) — the homepage layout
+- [`design/shop.html`](./shop.html) — the **Shop All** products page (filterable product
+  grid, sort, quick view)
+
+## The shop / products page
+
+`shop.html` is a **data-driven storefront**. Every product is rendered from a single
+`CATALOG` array in the page's script — change or replace that array and the whole grid,
+category filters, counts and sort update automatically. It ships seeded with U&G's real
+category taxonomy (Bedroom, Egyptian Cotton, Bathroom, Curtains, Wallpaper, Rugs, Scatters,
+Home Décor) and a representative set of products across each.
+
+**To load the full, real catalogue:** replace the `CATALOG` array with a real U&G product
+export. Each row is `[name, category, price, oldPrice, colourway, badge]`. A WooCommerce
+CSV export (Products → Export) or the store's product JSON feed maps directly onto this
+shape — I couldn't scrape it automatically because this environment's network policy blocks
+uglifestyle.com, so the live catalogue has to come from an export you provide.
 
 ## Direction
 
