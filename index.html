@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>U&G Lifestyle — Premium Homeware, Bedding & Décor</title>
+<meta name="description" content="U&G Lifestyle — premium South African homeware since 1980. Shop bed linen, Egyptian cotton, towels, curtains, rugs, wallpaper, scatter cushions and décor. Durban · Johannesburg · Cape Town.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -299,10 +300,10 @@
     <h2>Shop by Collection</h2>
   </div>
   <div class="coll-grid">
-    <a class="coll" href="#"><img src="https://cdn.shopify.com/s/files/1/0622/2351/5757/files/SundarSulpha.png" alt=""><span>Scatter Cushions</span></a>
-    <a class="coll" href="#"><img src="https://cdn.shopify.com/s/files/1/0622/2351/5757/files/ROCHELLEGREY_2.png" alt=""><span>Bed Throws</span></a>
-    <a class="coll" href="#"><img src="https://cdn.shopify.com/s/files/1/0622/2351/5757/files/Nostos29268-Beige_2.png" alt=""><span>Rugs</span></a>
-    <a class="coll" href="#"><img src="https://cdn.shopify.com/s/files/1/0622/2351/5757/files/43806.jpg" alt=""><span>Wallpapers</span></a>
+    <a class="coll" href="#"><img src="https://cdn.shopify.com/s/files/1/0622/2351/5757/files/SundarSulpha.png" alt="Scatter Cushions"><span>Scatter Cushions</span></a>
+    <a class="coll" href="#"><img src="https://cdn.shopify.com/s/files/1/0622/2351/5757/files/ROCHELLEGREY_2.png" alt="Bed Throws"><span>Bed Throws</span></a>
+    <a class="coll" href="#"><img src="https://cdn.shopify.com/s/files/1/0622/2351/5757/files/Nostos29268-Beige_2.png" alt="Rugs"><span>Rugs</span></a>
+    <a class="coll" href="#"><img src="https://cdn.shopify.com/s/files/1/0622/2351/5757/files/43806.jpg" alt="Wallpapers"><span>Wallpapers</span></a>
     <a class="coll plain" style="background:var(--cream)" href="#"><span>Bedroom Linen</span></a>
     <a class="coll plain" style="background:#EAE3DB" href="#"><span>Readymade Curtains</span></a>
     <a class="coll plain" style="background:#E2D8CE" href="#"><span>Towels</span></a>
@@ -366,6 +367,8 @@
   .tag.sale{background:var(--red)}
   .tag.out{background:#8a847d}
   .was{color:var(--grey);text-decoration:line-through;font-weight:300;font-size:13px;margin-left:8px}
+  .card-info .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+  .card-info .tags span{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--grey);border:1px solid var(--line);border-radius:2px;padding:2px 7px;line-height:1.6}
 </style>
 
 <script>
@@ -589,6 +592,22 @@ let cat = 'ALL', sort = 'feat', shown = 24;
 const fmt = n => 'R ' + n.toLocaleString('en-ZA', {minimumFractionDigits:2, maximumFractionDigits:2});
 const isSale = p => p[3] > p[2];
 
+const CATTAGS = {
+  S:['scatter cushion','cushion cover','décor','lounge','sofa'],
+  T:['bed throw','throw blanket','bedroom','décor','layering'],
+  R:['rug','floor rug','living room','textured','home décor'],
+  W:['wallpaper','feature wall','interior','décor','wall covering'],
+  C:['curtain','readymade','window','drapes','home décor'],
+  TW:['towel','bathroom','cotton','bath','home textiles'],
+  B:['bed linen','bedroom','cotton','comfort','bedding'],
+  O:['accessory','lifestyle','gift','home','u&g']
+};
+function tagsFor(name,c){
+  const base=(CATTAGS[c]||CATTAGS.O).slice();
+  const spec=(name.split(/[\s\-\u2013\u2014(]/)[0]||'').toLowerCase().replace(/[^a-z0-9&]/g,'');
+  const generic={cotton:1,egyptian:1,plain:1,soft:1,warm:1,the:1,light:1,natural:1,quilted:1,oxford:1};
+  return (spec.length>2 && !generic[spec]) ? [spec].concat(base).slice(0,5) : base.slice(0,5);
+}
 function cardHTML(p, newTag){
   const [name,c,price,cmp,ok,handle,img] = p;
   const sale = isSale(p);
@@ -597,9 +616,9 @@ function cardHTML(p, newTag){
   else if (sale) tag = '<span class="tag sale">Sale</span>';
   else if (newTag) tag = '<span class="tag">New</span>';
   return `<a class="card" href="https://uglifestyle.com/products/${handle}" target="_blank" rel="noopener">
-    <div class="card-img">${tag}<img loading="lazy" src="${IMG}${img}?width=540" alt="${name.replace(/"/g,'')}"><div class="quick">View Product</div></div>
+    <div class="card-img">${tag}<img loading="lazy" src="${IMG}${img}?width=540" alt="${(name+' – '+CATS[c]).replace(/"/g,'')}"><div class="quick">View Product</div></div>
     <div class="card-info"><div class="type">${CATS[c]}</div><div class="name">${name}</div>
-    <div class="price">${fmt(price)}${sale?`<span class="was">${fmt(cmp)}</span>`:''}</div></div></a>`;
+    <div class="price">${fmt(price)}${sale?`<span class="was">${fmt(cmp)}</span>`:''}</div><div class="tags">${tagsFor(name,c).map(t=>'<span>'+t+'</span>').join('')}</div></div></a>`;
 }
 
 function filtered(){
@@ -663,6 +682,7 @@ document.querySelectorAll('a[href="#"], a[href="#shop"]').forEach(a=>{
 
 document.getElementById('sort').onchange = e=>{sort=e.target.value;shown=24;render();};
 document.getElementById('more').onclick = ()=>{shown+=24;render();};
+document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
 buildFilters(); render();
 </script>
 
