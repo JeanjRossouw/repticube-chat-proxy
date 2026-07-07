@@ -232,9 +232,11 @@ function tagsFor(name,c){
 }
 const fmt = n => 'R ' + n.toLocaleString('en-ZA', {minimumFractionDigits:2, maximumFractionDigits:2});
 const isSale = p => p[3] > p[2];
+const varies = (c,handle) => c==='R'||c==='B'||c==='TW'||c==='C'||handle==='scatter-cushion-inners';
 function cardHTML(p, newTag){
   const [name,c,price,cmp,ok,handle,img] = p;
-  const sale = isSale(p);
+  const vary = varies(c,handle);
+  const sale = !vary && isSale(p);
   let tag = '';
   if (!ok) tag = '<span class="tag out">Sold Out</span>';
   else if (sale) tag = '<span class="tag sale">Sale</span>';
@@ -242,7 +244,7 @@ function cardHTML(p, newTag){
   return `<a class="card" href="https://uglifestyle.com/products/${handle}" target="_blank" rel="noopener">
     <div class="card-img">${tag}<img loading="lazy" src="${IMG}${img}?width=540" alt="${(name+' – '+CATS[c]).replace(/"/g,'')}"><div class="quick">View Product</div></div>
     <div class="card-info"><div class="type">${CATS[c]}</div><div class="name">${name}</div>
-    <div class="price">${fmt(price)}${sale?`<span class="was">${fmt(cmp)}</span>`:''}</div><div class="tags">${tagsFor(name,c).map(t=>'<span>'+t+'</span>').join('')}</div></div></a>`;
+    <div class="price">${vary?'From ':''}${fmt(price)}${sale?`<span class="was">${fmt(cmp)}</span>`:''}</div><div class="tags">${tagsFor(name,c).map(t=>'<span>'+t+'</span>').join('')}</div></div></a>`;
 }
 
 var cat=(window.PAGECAT||'ALL'), sort='feat', shown=24;
