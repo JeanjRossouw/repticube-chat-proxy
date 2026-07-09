@@ -1,0 +1,993 @@
+{
+  "sections": {
+    "hero_home": {
+      "type": "hero",
+      "blocks": {
+        "hero_heading": {
+          "type": "text",
+          "name": "Heading",
+          "settings": {
+            "text": "<h1>Where comfort comes home</h1>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "h1",
+            "font": "var(--font-heading--family)",
+            "wrap": "pretty",
+            "color": "var(--color-foreground-heading)"
+          },
+          "blocks": {}
+        },
+        "hero_subline": {
+          "type": "text",
+          "name": "Subline",
+          "settings": {
+            "text": "<p>Beds that honour your dog’s need for rest and belonging — crafted with care for real South African homes.</p>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1.125rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "padding-block-end": 8
+          },
+          "blocks": {}
+        },
+        "hero_cta": {
+          "type": "button",
+          "name": "Shop Beds",
+          "settings": {
+            "label": "Shop Beds",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "width": "fit-content",
+            "width_mobile": "fit-content"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "hero_heading",
+        "hero_subline",
+        "hero_cta"
+      ],
+      "name": "Hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/hearth-hound-hero-lifestyle.png",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": true,
+        "media_type_1_mobile": "image",
+        "image_1_mobile": "shopify://shop_images/hearth-hound-hero-lifestyle.png",
+        "media_type_2_mobile": "image",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-end",
+        "align_baseline": true,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 16,
+        "section_width": "full-width",
+        "section_height": "large",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-6",
+        "toggle_overlay": true,
+        "overlay_color": "#1F2A4466",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 100,
+        "padding-block-end": 64,
+        "image_2": "shopify://shop_images/KalahariKing-Lifestyle1.png"
+      }
+    },
+    "shop_by_range": {
+      "type": "collection-list",
+      "blocks": {
+        "range_header": {
+          "type": "group",
+          "name": "Header",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 8,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "border": "none",
+            "padding-block-end": 24
+          },
+          "blocks": {
+            "range_eyebrow": {
+              "type": "text",
+              "name": "Eyebrow",
+              "settings": {
+                "text": "<h6>Our ranges</h6>",
+                "width": "fit-content",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.75rem",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "color": "var(--color-primary)"
+              },
+              "blocks": {}
+            },
+            "range_heading": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h2>Shop by range</h2>",
+                "width": "fit-content",
+                "type_preset": "h2",
+                "font": "var(--font-heading--family)",
+                "color": "var(--color-foreground-heading)"
+              },
+              "blocks": {}
+            },
+            "range_sub": {
+              "type": "text",
+              "name": "Subtext",
+              "settings": {
+                "text": "<p>Five families of beds, each made for a different way of living — all built on the same promise of deep, lasting comfort.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "range_eyebrow",
+            "range_heading",
+            "range_sub"
+          ]
+        },
+        "static-collection-card": {
+          "type": "_collection-card",
+          "name": "Collection card",
+          "static": true,
+          "settings": {
+            "collection_card_gap": 12,
+            "placement": "below_image",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-end",
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 16
+          },
+          "blocks": {
+            "collection-card-image": {
+              "type": "_collection-card-image",
+              "name": "Image",
+              "static": true,
+              "settings": {
+                "image_ratio": "landscape"
+              }
+            },
+            "range_card_title": {
+              "type": "collection-title",
+              "name": "Title",
+              "settings": {
+                "type_preset": "h4",
+                "font": "var(--font-heading--family)",
+                "width": "fit-content",
+                "alignment": "left",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "padding-block-start": 4
+              },
+              "blocks": {}
+            },
+            "range_card_desc": {
+              "type": "text",
+              "name": "Description",
+              "settings": {
+                "text": "<p>{{ closest.collection.description }}</p>",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "range_card_title",
+            "range_card_desc"
+          ]
+        }
+      },
+      "block_order": [
+        "range_header"
+      ],
+      "name": "Shop by range",
+      "settings": {
+        "collection_list": [
+          "suburban",
+          "kalahari",
+          "koletto",
+          "genuine-leather",
+          "pad-range"
+        ],
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_collections": 5,
+        "columns": 3,
+        "mobile_columns": "1",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 20,
+        "rows_gap": 36,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 16,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 72,
+        "padding-block-end": 56
+      }
+    },
+    "shop_by_sleeper": {
+      "type": "collection-list",
+      "blocks": {
+        "sleeper_header": {
+          "type": "group",
+          "name": "Header",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 8,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "inherit_color_scheme": true,
+            "background_media": "none",
+            "border": "none",
+            "padding-block-end": 24
+          },
+          "blocks": {
+            "sleeper_eyebrow": {
+              "type": "text",
+              "name": "Eyebrow",
+              "settings": {
+                "text": "<h6>Shop by sleeper</h6>",
+                "width": "fit-content",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.75rem",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "color": "var(--color-primary)"
+              },
+              "blocks": {}
+            },
+            "sleeper_heading": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h2>Every dog has a sleep style</h2>",
+                "width": "fit-content",
+                "type_preset": "h2",
+                "font": "var(--font-heading--family)",
+                "color": "var(--color-foreground-heading)"
+              },
+              "blocks": {}
+            },
+            "sleeper_sub": {
+              "type": "text",
+              "name": "Subtext",
+              "settings": {
+                "text": "<p>Curler, sprawler, worrier or wise old soul — find the bed that fits the way your dog actually sleeps.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "sleeper_eyebrow",
+            "sleeper_heading",
+            "sleeper_sub"
+          ]
+        },
+        "static-collection-card": {
+          "type": "_collection-card",
+          "name": "Collection card",
+          "static": true,
+          "settings": {
+            "collection_card_gap": 10,
+            "placement": "below_image",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-end",
+            "inherit_color_scheme": true,
+            "border": "none",
+            "border_radius": 16
+          },
+          "blocks": {
+            "collection-card-image": {
+              "type": "_collection-card-image",
+              "name": "Image",
+              "static": true,
+              "settings": {
+                "image_ratio": "square"
+              }
+            },
+            "sleeper_card_title": {
+              "type": "collection-title",
+              "name": "Title",
+              "settings": {
+                "type_preset": "h5",
+                "font": "var(--font-heading--family)",
+                "width": "fit-content",
+                "alignment": "left",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "padding-block-start": 4
+              },
+              "blocks": {}
+            },
+            "sleeper_card_desc": {
+              "type": "text",
+              "name": "Description",
+              "settings": {
+                "text": "<p>{{ closest.collection.description }}</p>",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "sleeper_card_title",
+            "sleeper_card_desc"
+          ]
+        }
+      },
+      "block_order": [
+        "sleeper_header"
+      ],
+      "name": "Shop by sleeper",
+      "settings": {
+        "collection_list": [
+          "curl-up-sleepers",
+          "stretch-out-sleepers",
+          "calm-and-cosy",
+          "senior-and-joint-support"
+        ],
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
+        "max_collections": 4,
+        "columns": 4,
+        "mobile_columns": "1",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 20,
+        "rows_gap": 36,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 16,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 40,
+        "padding-block-end": 72
+      }
+    },
+    "featured_spotlight": {
+      "type": "featured-product",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
+          "name": "Product media",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/Huntlea-Suburban-Bolster-Dog-Bed-164906546.jpg",
+            "image_position": "cover"
+          }
+        },
+        "featured-product": {
+          "type": "_featured-product",
+          "static": true,
+          "name": "Product",
+          "blocks": {
+            "featured-product-title": {
+              "type": "product-title",
+              "name": "Title",
+              "static": true,
+              "settings": {
+                "type_preset": "h3",
+                "font": "var(--font-heading--family)",
+                "width": "100%",
+                "color": "var(--color-foreground-heading)"
+              }
+            },
+            "featured-product-price": {
+              "type": "_featured-product-price",
+              "name": "Price",
+              "static": true
+            },
+            "featured-product-gallery": {
+              "type": "_featured-product-gallery",
+              "name": "Image",
+              "static": true
+            },
+            "featured-product-swatches": {
+              "type": "swatches",
+              "name": "Swatches",
+              "static": true,
+              "settings": {
+                "hide_padding": true
+              }
+            }
+          }
+        }
+      },
+      "name": "Featured bed",
+      "settings": {
+        "product": "huntlea-suburban-bolster-bed",
+        "layout": "media-left",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
+    "trust_bar": {
+      "type": "section",
+      "blocks": {
+        "trust_1": {
+          "type": "group",
+          "name": "Proudly South African",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 10,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "inherit_color_scheme": true,
+            "background_media": "none",
+            "border": "none"
+          },
+          "blocks": {
+            "trust_1_icon": {
+              "type": "icon",
+              "settings": {
+                "icon": "map_pin",
+                "width": 28
+              },
+              "blocks": {}
+            },
+            "trust_1_text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Proudly South African</p>",
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.875rem",
+                "letter_spacing": "normal",
+                "line_height": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "trust_1_icon",
+            "trust_1_text"
+          ]
+        },
+        "trust_2": {
+          "type": "group",
+          "name": "Machine washable",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 10,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "inherit_color_scheme": true,
+            "background_media": "none",
+            "border": "none"
+          },
+          "blocks": {
+            "trust_2_icon": {
+              "type": "icon",
+              "settings": {
+                "icon": "washing",
+                "width": 28
+              },
+              "blocks": {}
+            },
+            "trust_2_text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Machine-washable covers</p>",
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.875rem",
+                "letter_spacing": "normal",
+                "line_height": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "trust_2_icon",
+            "trust_2_text"
+          ]
+        },
+        "trust_3": {
+          "type": "group",
+          "name": "Zip-removable covers",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 10,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "inherit_color_scheme": true,
+            "background_media": "none",
+            "border": "none"
+          },
+          "blocks": {
+            "trust_3_icon": {
+              "type": "icon",
+              "settings": {
+                "icon": "return",
+                "width": 28
+              },
+              "blocks": {}
+            },
+            "trust_3_text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Zip-removable covers</p>",
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.875rem",
+                "letter_spacing": "normal",
+                "line_height": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "trust_3_icon",
+            "trust_3_text"
+          ]
+        },
+        "trust_4": {
+          "type": "group",
+          "name": "Warranty",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 10,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "inherit_color_scheme": true,
+            "background_media": "none",
+            "border": "none"
+          },
+          "blocks": {
+            "trust_4_icon": {
+              "type": "icon",
+              "settings": {
+                "icon": "star",
+                "width": 28
+              },
+              "blocks": {}
+            },
+            "trust_4_text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>1-year factory warranty</p>",
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.875rem",
+                "letter_spacing": "normal",
+                "line_height": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "trust_4_icon",
+            "trust_4_text"
+          ]
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ],
+      "name": "Trust bar",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 24,
+        "section_width": "page-width",
+        "section_height": "auto",
+        "color_scheme": "scheme-3",
+        "background_media": "none",
+        "border": "none",
+        "toggle_overlay": false,
+        "padding-block-start": 44,
+        "padding-block-end": 44
+      }
+    },
+    "brand_story": {
+      "type": "media-with-content",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
+          "name": "Image",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/Calming_Kuddler_Round_-_Lifestyle_1_f68f7235-e7e8-467a-8778-e4d0740f3f26.png",
+            "image_position": "cover"
+          }
+        },
+        "content": {
+          "type": "_content-without-appearance",
+          "static": true,
+          "name": "Content",
+          "settings": {
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 20
+          },
+          "blocks": {
+            "story_eyebrow": {
+              "type": "text",
+              "name": "Eyebrow",
+              "settings": {
+                "text": "<h6>Our story</h6>",
+                "width": "fit-content",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.75rem",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "color": "var(--color-primary)"
+              },
+              "blocks": {}
+            },
+            "story_heading": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h2>Hearth &amp; Hound</h2>",
+                "width": "fit-content",
+                "type_preset": "h2",
+                "font": "var(--font-heading--family)",
+                "color": "var(--color-foreground-heading)"
+              },
+              "blocks": {}
+            },
+            "story_text": {
+              "type": "text",
+              "name": "Story",
+              "settings": {
+                "text": "<p>The hearth has always been the warmest place in the house — and every hound knows it. We bring Huntlea’s decades of South African craftsmanship into homes like yours: beds sewn to last, covers that zip off and wash clean, and fillings that hold their comfort season after season.</p><p>Because a dog doesn’t just sleep on a bed. They claim it, they trust it, and they come home to it — the same way you do.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            },
+            "story_cta": {
+              "type": "button",
+              "name": "Button",
+              "settings": {
+                "label": "Explore the ranges",
+                "link": "shopify://collections",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "width": "fit-content",
+                "width_mobile": "fit-content"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "story_eyebrow",
+            "story_heading",
+            "story_text",
+            "story_cta"
+          ]
+        }
+      },
+      "name": "Brand story",
+      "settings": {
+        "media_position": "left",
+        "section_width": "page-width",
+        "extend_media": false,
+        "color_scheme": "scheme-2",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "newsletter": {
+      "type": "section",
+      "blocks": {
+        "news_group": {
+          "type": "group",
+          "name": "Newsletter",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 14,
+            "width": "custom",
+            "custom_width": 55,
+            "width_mobile": "fill",
+            "height": "fit",
+            "inherit_color_scheme": true,
+            "background_media": "none",
+            "border": "none"
+          },
+          "blocks": {
+            "news_heading": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h2>Stay close to the hearth</h2>",
+                "width": "fit-content",
+                "alignment": "center",
+                "type_preset": "h3",
+                "font": "var(--font-heading--family)",
+                "color": "var(--color-foreground-heading)"
+              },
+              "blocks": {}
+            },
+            "news_sub": {
+              "type": "text",
+              "name": "Subtext",
+              "settings": {
+                "text": "<p>Care tips, new colours and early access to limited runs — a short letter for people who love a well-rested dog.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "alignment": "center",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            },
+            "news_signup": {
+              "type": "email-signup",
+              "settings": {
+                "width": "fill",
+                "inherit_color_scheme": true,
+                "heading": "",
+                "border_style": "all",
+                "border_width": 1,
+                "border_radius": 100,
+                "input_type_preset": "paragraph",
+                "style_class": "button-unstyled",
+                "display_type": "arrow",
+                "label": "Sign up",
+                "integrated_button": true,
+                "button_type_preset": "paragraph",
+                "padding-block-start": 6
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "news_heading",
+            "news_sub",
+            "news_signup"
+          ]
+        }
+      },
+      "block_order": [
+        "news_group"
+      ],
+      "name": "Newsletter",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "full-width",
+        "section_height": "auto",
+        "color_scheme": "scheme-4",
+        "background_media": "image",
+        "border": "none",
+        "toggle_overlay": true,
+        "padding-block-start": 80,
+        "padding-block-end": 88,
+        "background_image": "shopify://shop_images/July_2025-15.jpg",
+        "background_image_position": "cover",
+        "overlay_color": "#1F2A44D9",
+        "overlay_style": "solid"
+      }
+    },
+    "outdoor_story": {
+      "type": "media-with-content",
+      "blocks": {
+        "media": {
+          "type": "_media-without-appearance",
+          "static": true,
+          "name": "Image",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/KalahariKing-Lifestyle2.png",
+            "image_position": "cover"
+          }
+        },
+        "content": {
+          "type": "_content-without-appearance",
+          "static": true,
+          "name": "Content",
+          "settings": {
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 20
+          },
+          "blocks": {
+            "story_eyebrow": {
+              "type": "text",
+              "name": "Eyebrow",
+              "settings": {
+                "text": "<h6>Built for the outdoors</h6>",
+                "width": "fit-content",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.75rem",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "color": "var(--color-primary)"
+              },
+              "blocks": {}
+            },
+            "story_heading": {
+              "type": "text",
+              "name": "Heading",
+              "settings": {
+                "text": "<h2>Sun, stoep and muddy paws</h2>",
+                "width": "fit-content",
+                "type_preset": "h2",
+                "font": "var(--font-heading--family)",
+                "color": "var(--color-foreground-heading)"
+              },
+              "blocks": {}
+            },
+            "story_text": {
+              "type": "text",
+              "name": "Story",
+              "settings": {
+                "text": "<p>Kalahari and Original beds are cut from waterproof, UV-resistant Riptec — antifungal, hose-off tough, and stitched to outlast the dogs who really live outside. Drag it to the stoep, the bakkie or the garden; it comes back looking like itself.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "color": "var(--color-foreground)"
+              },
+              "blocks": {}
+            },
+            "story_cta": {
+              "type": "button",
+              "name": "Button",
+              "settings": {
+                "label": "Shop Kalahari",
+                "link": "shopify://collections/kalahari",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "width": "fit-content",
+                "width_mobile": "fit-content"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "story_eyebrow",
+            "story_heading",
+            "story_text",
+            "story_cta"
+          ]
+        }
+      },
+      "name": "Outdoor story",
+      "settings": {
+        "media_position": "right",
+        "section_width": "page-width",
+        "extend_media": false,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "hero_home",
+    "shop_by_range",
+    "shop_by_sleeper",
+    "featured_spotlight",
+    "trust_bar",
+    "brand_story",
+    "outdoor_story",
+    "newsletter"
+  ]
+}
