@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 556 320" role="img" aria-label="Rug Room">
+<rect width="556" height="320" fill="#123F39"/>
+<g transform="translate(64 76) scale(1)">
+<rect x="0" y="0" width="168" height="168" fill="none" stroke="#EFEFEC" stroke-width="10"/>
+<rect x="36" y="36" width="96" height="96" fill="#CBC5B6"/>
+<path d="M40 68h88 M40 100h88 M68 40v88 M100 40v88" stroke="#B5AE9D" stroke-width="3.5"/>
+<rect x="36" y="36" width="96" height="96" fill="none" stroke="#EFEFEC" stroke-width="5"/>
+</g>
+<path d="M6 70 V0 H26 C37 0 40 8 40 16 C40 27 36 32 26 32 H6 M26 32 L40 70" transform="translate(292 80)" fill="none" stroke="#EFEFEC" stroke-width="9" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M6 0 V50 C6 64 14 70 22 70 C30 70 38 64 38 50 V0" transform="translate(370 80)" fill="none" stroke="#EFEFEC" stroke-width="9" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M38 14 C36 4 28 0 22 0 C10 0 6 12 6 35 C6 58 10 70 22 70 C32 70 38 64 38 52 V38 H24" transform="translate(448 80)" fill="none" stroke="#EFEFEC" stroke-width="9" stroke-linejoin="miter" stroke-linecap="butt"/>
+<path d="M6 70 V0 H26 C37 0 40 8 40 16 C40 27 36 32 26 32 H6 M26 32 L40 70" transform="translate(292 172)" fill="none" stroke="#CBC5B6" stroke-width="9" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M22 0 C10 0 6 12 6 35 C6 58 10 70 22 70 C34 70 38 58 38 35 C38 12 34 0 22 0 Z" transform="translate(344 172)" fill="none" stroke="#CBC5B6" stroke-width="9" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M22 0 C10 0 6 12 6 35 C6 58 10 70 22 70 C34 70 38 58 38 35 C38 12 34 0 22 0 Z" transform="translate(396 172)" fill="none" stroke="#CBC5B6" stroke-width="9" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M6 70 V0 L22 32 L38 0 V70" transform="translate(448 172)" fill="none" stroke="#CBC5B6" stroke-width="9" stroke-linejoin="miter" stroke-linecap="butt"/>
+</svg>
