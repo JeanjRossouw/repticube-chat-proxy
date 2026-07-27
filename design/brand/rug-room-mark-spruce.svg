@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 168" role="img" aria-label="Rug Room mark">
+<rect width="168" height="168" fill="#123F39"/>
+<g transform="translate(24 24) scale(0.7142857142857143)">
+<rect x="0" y="0" width="168" height="168" fill="none" stroke="#EFEFEC" stroke-width="10"/>
+<rect x="36" y="36" width="96" height="96" fill="#CBC5B6"/>
+<path d="M40 68h88 M40 100h88 M68 40v88 M100 40v88" stroke="#B5AE9D" stroke-width="3.5"/>
+<rect x="36" y="36" width="96" height="96" fill="none" stroke="#EFEFEC" stroke-width="5"/>
+</g>
+</svg>

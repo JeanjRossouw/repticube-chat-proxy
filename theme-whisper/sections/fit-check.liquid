@@ -1,0 +1,313 @@
+{% comment %}
+  RUG ROOM — FIT CHECK  (Custom Liquid version)
+  No code editor needed. In Shopify admin:
+    Online Store → Themes → Customize → Add section → Custom Liquid
+    → paste ALL of this into the box → Save.
+  Works on the Home page and on the Product template.
+  On a product page it reads the sizes from that product's variants.
+{% endcomment %}
+
+{%- liquid
+  assign is_product = false
+  if product != blank and product.variants.size > 0
+    assign is_product = true
+  endif
+-%}
+
+<section class="fitcheck" id="fitcheck-rr1" style="
+  --fc-bg: #EFEFEC;
+  --fc-ink: #17191A;
+  --fc-accent: #123F39;
+  --fc-line: #17191A28;
+">
+  <div class="fitcheck__inner">
+    <div class="fitcheck__head">
+      
+        <p class="fitcheck__eyebrow">Fit check</p>
+      <h2 class="fitcheck__title">Will it actually fit?</h2>
+      
+        <div class="fitcheck__lede"><p>Set your room, pick a size, and see the plan drawn to scale before you buy.</p></div>
+    </div>
+
+    <div class="fitcheck__grid">
+      <div class="fitcheck__controls">
+        <div class="fc-field">
+          <label for="fc-w-rr1">Room width — <span class="fc-val" data-fc="wv"></span></label>
+          <input type="range" id="fc-w-rr1" data-fc="w" min="2.4" max="9" step="0.1" value="4.2">
+        </div>
+        <div class="fc-field">
+          <label for="fc-l-rr1">Room length — <span class="fc-val" data-fc="lv"></span></label>
+          <input type="range" id="fc-l-rr1" data-fc="l" min="2.4" max="10" step="0.1" value="5">
+        </div>
+        <div class="fc-field">
+          <label for="fc-s-rr1">Rug size</label>
+          <select id="fc-s-rr1" data-fc="size"></select>
+        </div>
+        <div class="fc-field">
+          <label for="fc-f-rr1">What goes on it</label>
+          <select id="fc-f-rr1" data-fc="furn">
+            <option value="sofa">3-seater sofa + coffee table</option>
+            <option value="lshape">L-shape sofa</option>
+            <option value="bed_q">Queen bed</option>
+            <option value="bed_k">King bed</option>
+            <option value="dining6">6-seater dining table</option>
+            <option value="none">Nothing — open floor</option>
+          </select>
+        </div>
+
+        <p class="fc-verdict" data-fc="verdict" role="status" aria-live="polite"></p>
+
+        {%- if is_product -%}
+          <div class="fc-buy">
+            <span class="fc-price" data-fc="price"></span>
+            <button type="button" class="fc-add" data-fc="add">Add this size to cart</button>
+          </div>
+          <p class="fc-note" data-fc="note"></p>
+        {%- endif -%}
+      </div>
+
+      <div class="fitcheck__stage">
+        <svg data-fc="stage" viewBox="0 0 640 460" role="img"
+             aria-label="Scale plan of the selected rug size in a room of the dimensions you set"></svg>
+        <p class="fc-caption">Plan view, drawn to scale. Rule of thumb: front legs of the seating on the rug, 400&nbsp;mm of bare floor to the walls.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #fitcheck-rr1{
+    background:var(--fc-bg);color:var(--fc-ink);
+    padding:clamp(40px,7vw,96px) clamp(18px,5vw,64px);
+  }
+  #fitcheck-rr1 *{box-sizing:border-box}
+  #fitcheck-rr1 .fitcheck__inner{max-width:1240px;margin:0 auto}
+  #fitcheck-rr1 .fitcheck__eyebrow{
+    font-family:ui-monospace,"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--fc-accent);margin:0 0 14px;
+  }
+  #fitcheck-rr1 .fitcheck__title{
+    font-size:clamp(1.7rem,4vw,3rem);line-height:1;letter-spacing:-.03em;margin:0;font-weight:800;
+  }
+  #fitcheck-rr1 .fitcheck__lede{max-width:58ch;margin-top:16px;opacity:.78;line-height:1.55}
+  #fitcheck-rr1 .fitcheck__grid{
+    display:grid;grid-template-columns:320px 1fr;gap:clamp(22px,3vw,48px);
+    align-items:start;margin-top:clamp(28px,4vw,52px);
+  }
+  @media(max-width:860px){#fitcheck-rr1 .fitcheck__grid{grid-template-columns:1fr}}
+  #fitcheck-rr1 .fitcheck__controls{display:flex;flex-direction:column;gap:18px}
+  #fitcheck-rr1 .fc-field label{
+    display:block;font-family:ui-monospace,"IBM Plex Mono",monospace;font-size:.66rem;
+    letter-spacing:.13em;text-transform:uppercase;opacity:.6;margin-bottom:7px;
+  }
+  #fitcheck-rr1 .fc-field input[type=range]{width:100%;accent-color:var(--fc-accent)}
+  #fitcheck-rr1 .fc-field select{
+    width:100%;padding:11px 12px;border:1px solid var(--fc-line);border-radius:0;
+    background:var(--fc-bg);color:var(--fc-ink);font:inherit;font-size:.94rem;
+  }
+  #fitcheck-rr1 .fc-val{font-family:ui-monospace,monospace;opacity:1;font-size:.8rem}
+  #fitcheck-rr1 .fc-verdict{
+    border-left:3px solid var(--fc-accent);padding:10px 0 10px 14px;margin:4px 0 0;font-size:.95rem;line-height:1.5;
+  }
+  #fitcheck-rr1 .fc-buy{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+  #fitcheck-rr1 .fc-price{font-family:ui-monospace,monospace;font-size:1.05rem}
+  #fitcheck-rr1 .fc-add{
+    padding:14px 20px;border:0;cursor:pointer;background:var(--fc-accent);color:var(--fc-bg);
+    font:inherit;font-size:.92rem;border-radius:999px;transition:opacity .2s,transform .2s;
+  }
+  #fitcheck-rr1 .fc-add:hover{opacity:.9;transform:translateY(-1px)}
+  #fitcheck-rr1 .fc-add[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+  #fitcheck-rr1 .fc-note{font-size:.82rem;opacity:.7;margin:0;min-height:1.2em}
+  #fitcheck-rr1 .fitcheck__stage svg{
+    width:100%;height:auto;aspect-ratio:64/46;border:1px solid var(--fc-line);background:#fff;display:block;
+  }
+  #fitcheck-rr1 .fc-caption{
+    font-size:.76rem;opacity:.62;margin:10px 0 0;max-width:62ch;
+  }
+  #fitcheck-rr1 :focus-visible{outline:2px solid var(--fc-accent);outline-offset:3px}
+  @media(prefers-reduced-motion:reduce){#fitcheck-rr1 *{transition:none!important}}
+</style>
+
+<script>
+(function(){
+  var root = document.getElementById("fitcheck-rr1");
+  if(!root) return;
+  var q = function(k){ return root.querySelector('[data-fc="'+k+'"]'); };
+
+  {%- if is_product -%}
+    var VARIANTS = {{ product.variants | json }};
+    var MONEY_FMT = {{ shop.money_format | json }};
+  {%- else -%}
+    var VARIANTS = null;
+  {%- endif -%}
+
+  var FALLBACK = "800 x 3000 runner\n1200 x 1700\n1600 x 2300\n2000 x 2900\n2400 x 3300\n3000 x 4000\n2000 \u00d8 round";
+
+  /* ---- parse "2000 x 2900", "2000×2900mm", "2000 Ø round" into metres ---- */
+  function parseSize(str){
+    if(!str) return null;
+    var round = /ø|round|rond/i.test(str);
+    var nums = (str.match(/\d{2,4}/g) || []).map(Number);
+    if(!nums.length) return null;
+    /* centimetres or millimetres: if any dimension is under 400 it must be cm */
+    var isCm = nums.some(function(n){ return n < 400; });
+    var div = isCm ? 100 : 1000;
+    var w = nums[0]/div, d = (nums[1] ? nums[1]/div : w);
+    if(w < 0.4 || d < 0.4 || w > 6 || d > 6) return null;
+    return {w:w, d:d, round:round};
+  }
+
+  function money(cents){
+    var v = (cents/100).toFixed(2).replace(/\.00$/,"");
+    return "R " + v.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+
+  /* ---- build the size list ---- */
+  var SIZES = [];
+  if(VARIANTS){
+    VARIANTS.forEach(function(v){
+      var mf = null;
+      var src = v.title;
+      var dim = parseSize(mf || src);
+      if(dim){
+        dim.label = v.title;
+        dim.id = v.id;
+        dim.price = v.price;
+        dim.available = v.available;
+        SIZES.push(dim);
+      }
+    });
+  }
+  if(!SIZES.length){
+    FALLBACK.split("\n").forEach(function(line){
+      line = line.trim(); if(!line) return;
+      var dim = parseSize(line);
+      if(dim){ dim.label = line; SIZES.push(dim); }
+    });
+  }
+  if(!SIZES.length){ root.style.display = "none"; return; }
+
+  var sel = q("size");
+  sel.innerHTML = SIZES.map(function(s,i){
+    var out = (s.available === false) ? " — sold out" : "";
+    return '<option value="'+i+'">'+s.label+out+'</option>';
+  }).join("");
+  /* default to the middle size, usually the 2000 x 2900 */
+  sel.value = Math.min(SIZES.length-1, Math.floor(SIZES.length/2));
+
+  /* ---- furniture footprints in metres, offset from room centre ---- */
+  var FURN = {
+    sofa:    [{w:2.10,d:0.90,y:-0.50},{w:1.10,d:0.55,y:0.55}],
+    lshape:  [{w:2.60,d:0.95,y:-0.60},{w:0.95,d:1.60,y:0.30,x:0.82},{w:1.00,d:0.55,y:0.55,x:-0.45}],
+    bed_q:   [{w:1.53,d:2.03,y:0.10}],
+    bed_k:   [{w:1.83,d:2.03,y:0.10}],
+    dining6: [{w:1.80,d:0.95,y:0}],
+    none:    []
+  };
+
+  function draw(){
+    var roomW = parseFloat(q("w").value), roomD = parseFloat(q("l").value);
+    var s = SIZES[parseInt(sel.value,10)], f = FURN[q("furn").value] || [];
+
+    q("wv").textContent = roomW.toFixed(1) + " m";
+    q("lv").textContent = roomD.toFixed(1) + " m";
+
+    var VW=640, VH=460, pad=58;
+    var k = Math.min((VW-pad*2)/roomW, (VH-pad*2)/roomD);
+    var RW=roomW*k, RD=roomD*k, ox=(VW-RW)/2, oy=(VH-RD)/2;
+    var rugW=s.w*k, rugD=s.d*k;
+    var cx=ox+RW/2, cy=oy+RD/2;
+
+    var rug = s.round
+      ? '<circle cx="'+cx+'" cy="'+cy+'" r="'+(rugW/2)+'" fill="url(#fcw-rr1)" stroke="#17191A" stroke-width="1.1"/>'
+      : '<rect x="'+(cx-rugW/2)+'" y="'+(cy-rugD/2)+'" width="'+rugW+'" height="'+rugD+'" fill="url(#fcw-rr1)" stroke="#17191A" stroke-width="1.1"/>';
+
+    var furn = f.map(function(o){
+      var w=o.w*k, d=o.d*k;
+      var x = cx - w/2 + (o.x||0)*k;
+      var y = cy - d/2 + (o.y||0)*k;
+      return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+d+'" rx="3" fill="#FFFFFF" fill-opacity=".82" stroke="#17191A" stroke-width="1.2"/>';
+    }).join("");
+
+    q("stage").innerHTML =
+      '<defs>'+
+        '<pattern id="fcw-rr1" width="9" height="9" patternUnits="userSpaceOnUse">'+
+          '<rect width="9" height="9" fill="#CBC5B6"/><path d="M0 4.5h9M4.5 0v9" stroke="#B5AE9D" stroke-width="1.3"/></pattern>'+
+        '<pattern id="fcf-rr1" width="30" height="30" patternUnits="userSpaceOnUse">'+
+          '<rect width="30" height="30" fill="#fff"/><path d="M30 0v30M0 30h30" stroke="#ECEAE3"/></pattern>'+
+      '</defs>'+
+      '<rect x="'+ox+'" y="'+oy+'" width="'+RW+'" height="'+RD+'" fill="url(#fcf-rr1)" stroke="#17191A" stroke-width="1.6"/>'+
+      rug + furn +
+      '<g stroke="'+getComputedStyle(root).getPropertyValue("--fc-accent").trim()+'" stroke-width="1" font-family="ui-monospace, monospace" font-size="10" fill="'+getComputedStyle(root).getPropertyValue("--fc-accent").trim()+'">'+
+        '<path d="M'+ox+' '+(oy+RD+24)+'h'+RW+'M'+ox+' '+(oy+RD+20)+'v8M'+(ox+RW)+' '+(oy+RD+20)+'v8"/>'+
+        '<text x="'+cx+'" y="'+(oy+RD+40)+'" text-anchor="middle">'+roomW.toFixed(1)+' m</text>'+
+        '<path d="M'+(ox-24)+' '+oy+'v'+RD+'M'+(ox-28)+' '+oy+'h8M'+(ox-28)+' '+(oy+RD)+'h8"/>'+
+        '<text x="'+(ox-32)+'" y="'+cy+'" text-anchor="middle" transform="rotate(-90 '+(ox-32)+' '+cy+')">'+roomD.toFixed(1)+' m</text>'+
+      '</g>';
+
+    /* ---- verdict ---- */
+    var side=(roomW-s.w)/2, end=(roomD-s.d)/2, msg;
+    if(side<0 || end<0){
+      msg = "Too big for this room. Go down a size — this one runs past the walls.";
+    } else if(side<0.2 || end<0.2){
+      msg = "Tight. Only "+Math.round(Math.min(side,end)*1000)+" mm of bare floor at the narrowest point, so it will read as wall-to-wall carpet.";
+    } else if(side>1.2 && end>1.2){
+      msg = "Undersized. "+side.toFixed(1)+" m of bare floor each side means the rug floats. Size up.";
+    } else {
+      msg = "Good fit. "+Math.round(side*1000)+" mm of floor each side, "+Math.round(end*1000)+" mm at the ends, furniture sitting on the rug with a clean border.";
+    }
+    q("verdict").textContent = msg;
+
+    var priceEl = q("price");
+    if(priceEl && s.price != null){
+      priceEl.textContent = money(s.price) + " — " + s.label;
+      var btn = q("add");
+      btn.disabled = (s.available === false);
+      btn.textContent = (s.available === false) ? "Sold out in this size" : "Add this size to cart";
+    }
+  }
+
+  ["w","l","size","furn"].forEach(function(k){
+    var el = q(k); if(el) el.addEventListener("input", draw);
+  });
+  draw();
+
+  /* ---- add to cart ---- */
+  var addBtn = q("add");
+  if(addBtn){
+    addBtn.addEventListener("click", function(){
+      var s = SIZES[parseInt(sel.value,10)];
+      if(!s || !s.id) return;
+      addBtn.disabled = true; addBtn.textContent = "Adding…";
+      fetch("/cart/add.js", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ items:[{ id:s.id, quantity:1 }] })
+      }).then(function(r){
+        if(!r.ok) throw new Error();
+        addBtn.textContent = "Added — view cart";
+        q("note").textContent = s.label + " is in your cart.";
+        addBtn.disabled = false;
+        addBtn.onclick = function(){ window.location.href = "/cart"; };
+      }).catch(function(){
+        addBtn.disabled = false;
+        addBtn.textContent = "Add this size to cart";
+        q("note").textContent = "That didn't go through. Refresh and try again.";
+      });
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Fit Check",
+  "tag": "section",
+  "class": "section-fit-check",
+  "presets": [
+    {
+      "name": "Fit Check"
+    }
+  ]
+}
+{% endschema %}
