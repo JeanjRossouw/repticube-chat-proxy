@@ -160,6 +160,10 @@
         "padding-block-end": 64
       }
     },
+    "shop_by_collection_rr1": {
+      "type": "shop-by-collection",
+      "settings": {}
+    },
     "fit_check_rr1": {
       "type": "fit-check",
       "settings": {}
@@ -699,6 +703,7 @@
   },
   "order": [
     "hero_p9CmMG",
+    "shop_by_collection_rr1",
     "fit_check_rr1",
     "product_list_themegen",
     "section_Ea3hn6"
