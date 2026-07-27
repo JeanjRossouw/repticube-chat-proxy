@@ -147,10 +147,13 @@
   function parseSize(str){
     if(!str) return null;
     var round = /ø|round|rond/i.test(str);
-    var nums = (str.match(/\d{3,4}/g) || []).map(Number);
+    var nums = (str.match(/\d{2,4}/g) || []).map(Number);
     if(!nums.length) return null;
-    var w = nums[0]/1000, d = (nums[1] ? nums[1]/1000 : w);
-    if(w < 0.4 || d < 0.4) return null;
+    /* centimetres or millimetres: if any dimension is under 400 it must be cm */
+    var isCm = nums.some(function(n){ return n < 400; });
+    var div = isCm ? 100 : 1000;
+    var w = nums[0]/div, d = (nums[1] ? nums[1]/div : w);
+    if(w < 0.4 || d < 0.4 || w > 6 || d > 6) return null;
     return {w:w, d:d, round:round};
   }
 
