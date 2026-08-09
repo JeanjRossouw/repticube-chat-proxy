@@ -64,13 +64,15 @@ app with:
 npm run start:network
 ```
 
-It prints a **Network:** line with the exact address to type into your phone,
-for example `http://192.168.1.47:3000`. Use that whole address, numbers and
-all — the `192.168.x.x` in this README is a placeholder, not a real address.
+It prints a **QR code** in the terminal. Point your phone's camera at it and
+tap the link that pops up — there is nothing to type.
 
-If the address does not load on your phone, check in this order: the app is
-still running on your computer, the phone is on Wi-Fi rather than mobile data,
-and the address opens on the computer itself. Some routers (and most guest
+If you would rather type it, the same output has an "On your phone" line with
+the address on it. Enter it exactly as printed, digits and dots only.
+
+If it does not load on your phone, check in this order: the app is still
+running on your computer, the phone is on Wi-Fi rather than mobile data, and
+the address opens on the computer itself. Some routers (and most guest
 networks) stop devices from seeing each other, which also causes this.
 
 > **No password.** Anyone else on that Wi-Fi can open the same address and read,
@@ -124,7 +126,7 @@ database is created on the next start.
 | --- | --- |
 | `npm install` | Installs dependencies (run once) |
 | `npm start` | Starts the app on <http://localhost:3000> |
-| `npm run start:network` | Same, but also reachable from a phone on your Wi-Fi |
+| `npm run start:network` | Same, plus a QR code to open it on your phone |
 | `npm run seed` | Replaces all data with three months of examples |
 | `npm run build` | Builds the frontend for offline use (optional) |
 
