@@ -119,14 +119,18 @@ export default function Ledger({ kind, categories, onDataChanged }) {
             {!loading &&
               entries.map((entry) => (
                 <tr key={entry.id}>
-                  <td>{formatDate(entry.date)}</td>
-                  <td>{entry.description}</td>
-                  <td>
+                  <td data-label="Date">{formatDate(entry.date)}</td>
+                  <td data-label="Description">{entry.description}</td>
+                  <td data-label="Category">
                     <span className="pill">{entry.category ?? 'Uncategorised'}</span>
                   </td>
-                  <td className="muted">{entry[optionalField] || '—'}</td>
-                  <td className="right mono">{formatMoney(entry.amount)}</td>
-                  <td className="right nowrap">
+                  <td data-label={optionalLabel} className="muted">
+                    {entry[optionalField] || '—'}
+                  </td>
+                  <td data-label="Amount" className="right mono">
+                    {formatMoney(entry.amount)}
+                  </td>
+                  <td className="right nowrap actions-cell">
                     <button type="button" className="link-button" onClick={() => setEditing(entry)}>
                       Edit
                     </button>

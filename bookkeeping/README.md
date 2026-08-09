@@ -51,6 +51,33 @@ Then open <http://localhost:3000> in your browser.
 Leave the terminal window open while you work — closing it stops the app. To
 stop it deliberately, click the terminal and press `Ctrl+C`.
 
+## Using it on a phone or tablet
+
+The app adapts to small screens: the sidebar becomes a row of buttons across
+the top, and the tables turn into a card per entry so nothing runs off the
+side of the screen.
+
+To open it on your phone, both devices must be on the **same Wi-Fi**. Start the
+app with:
+
+```bash
+npm run start:network
+```
+
+It prints a **Network:** line with the exact address to type into your phone,
+for example `http://192.168.1.47:3000`. Use that whole address, numbers and
+all — the `192.168.x.x` in this README is a placeholder, not a real address.
+
+If the address does not load on your phone, check in this order: the app is
+still running on your computer, the phone is on Wi-Fi rather than mobile data,
+and the address opens on the computer itself. Some routers (and most guest
+networks) stop devices from seeing each other, which also causes this.
+
+> **No password.** Anyone else on that Wi-Fi can open the same address and read,
+> edit or delete your books. That is usually fine at home; avoid it on café,
+> hotel or shared office networks, and never forward this through your router
+> to the internet.
+
 ## Using the app
 
 The sidebar has six sections:
@@ -97,6 +124,7 @@ database is created on the next start.
 | --- | --- |
 | `npm install` | Installs dependencies (run once) |
 | `npm start` | Starts the app on <http://localhost:3000> |
+| `npm run start:network` | Same, but also reachable from a phone on your Wi-Fi |
 | `npm run seed` | Replaces all data with three months of examples |
 | `npm run build` | Builds the frontend for offline use (optional) |
 

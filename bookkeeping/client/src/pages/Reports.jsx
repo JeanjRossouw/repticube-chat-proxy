@@ -162,9 +162,13 @@ function Breakdown({ title, rows, total }) {
           )}
           {rows.map((row) => (
             <tr key={row.category}>
-              <td>{row.category}</td>
-              <td className="right muted">{row.entries}</td>
-              <td className="right mono">{formatMoney(row.total)}</td>
+              <td data-label="Category">{row.category}</td>
+              <td data-label="Entries" className="right muted">
+                {row.entries}
+              </td>
+              <td data-label="Amount" className="right mono">
+                {formatMoney(row.total)}
+              </td>
             </tr>
           ))}
         </tbody>

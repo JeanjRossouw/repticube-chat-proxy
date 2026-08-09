@@ -9,10 +9,13 @@ export default function Modal({ title, onClose, children, width = 520 }) {
       if (event.key === 'Escape') onClose();
     };
     document.addEventListener('keydown', onKeyDown);
+    // Both elements: browsers disagree about which one scrolls the page.
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
     return () => {
       document.removeEventListener('keydown', onKeyDown);
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [onClose]);
 
