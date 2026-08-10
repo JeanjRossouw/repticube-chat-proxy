@@ -70,15 +70,18 @@ export default function Dashboard({ refreshKey }) {
             )}
             {data.recent.map((entry) => (
               <tr key={`${entry.type}-${entry.id}`}>
-                <td>{formatDate(entry.date)}</td>
-                <td>{entry.description}</td>
-                <td>
+                <td data-label="Date">{formatDate(entry.date)}</td>
+                <td data-label="Description">{entry.description}</td>
+                <td data-label="Category">
                   <span className="pill">{entry.category ?? 'Uncategorised'}</span>
                 </td>
-                <td className={entry.type === 'income' ? 'positive' : 'negative'}>
+                <td
+                  data-label="Type"
+                  className={entry.type === 'income' ? 'positive' : 'negative'}
+                >
                   {entry.type === 'income' ? 'Income' : 'Expense'}
                 </td>
-                <td className="right mono">
+                <td data-label="Amount" className="right mono">
                   {entry.type === 'income' ? '' : '−'}
                   {formatMoney(entry.amount)}
                 </td>

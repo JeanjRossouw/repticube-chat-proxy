@@ -143,19 +143,21 @@ export default function Invoices({ onDataChanged }) {
             {!loading &&
               invoices.map((invoice) => (
                 <tr key={invoice.id}>
-                  <td className="mono">
+                  <td data-label="Number" className="mono">
                     <Link to={`/invoices/${invoice.id}`}>{invoice.invoice_number}</Link>
                   </td>
-                  <td>{invoice.client_name}</td>
-                  <td>{formatDate(invoice.date_issued)}</td>
-                  <td>{formatDate(invoice.due_date)}</td>
-                  <td>
+                  <td data-label="Client">{invoice.client_name}</td>
+                  <td data-label="Issued">{formatDate(invoice.date_issued)}</td>
+                  <td data-label="Due">{formatDate(invoice.due_date)}</td>
+                  <td data-label="Status">
                     <span className={`status status-${invoice.display_status}`}>
                       {STATUS_LABEL[invoice.display_status]}
                     </span>
                   </td>
-                  <td className="right mono">{formatMoney(invoice.total)}</td>
-                  <td className="right nowrap">
+                  <td data-label="Total" className="right mono">
+                    {formatMoney(invoice.total)}
+                  </td>
+                  <td className="right nowrap actions-cell">
                     <Link className="link-button" to={`/invoices/${invoice.id}`}>
                       View
                     </Link>

@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 const LINKS = [
   { to: '/', label: 'Dashboard', end: true },
@@ -10,6 +11,16 @@ const LINKS = [
 ];
 
 export default function Layout({ companyName }) {
+  const nav = useRef(null);
+  const { pathname } = useLocation();
+
+  // On a phone the navigation scrolls sideways, so keep the current section
+  // visible when the page changes.
+  useEffect(() => {
+    const active = nav.current?.querySelector('.is-active');
+    active?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }, [pathname]);
+
   return (
     <div className="app">
       <aside className="sidebar">
@@ -17,7 +28,7 @@ export default function Layout({ companyName }) {
           <span className="sidebar-brand-mark">£</span>
           <span className="sidebar-brand-text">{companyName || 'Bookkeeping'}</span>
         </div>
-        <nav>
+        <nav ref={nav}>
           {LINKS.map((link) => (
             <NavLink
               key={link.to}
