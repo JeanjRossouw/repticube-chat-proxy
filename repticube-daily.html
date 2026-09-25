@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ReptiCube Daily</title>
+<style>
+  :root {
+    --green: #16a34a; --green-dark: #15803d; --bg: #f5f7f5; --card: #ffffff;
+    --ink: #1c1917; --muted: #78716c; --line: #e7e5e4; --red: #dc2626; --amber: #f59e0b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 16px 16px 90px; }
+  header { display: flex; align-items: center; gap: 10px; padding: 14px 0 4px; }
+  header .logo { font-size: 30px; }
+  header h1 { font-size: 20px; font-weight: 800; }
+  header .date { font-size: 13px; color: var(--muted); font-weight: 600; }
+  #banner { display: none; margin: 12px 0; padding: 12px 14px; border-radius: 12px; font-size: 14px; font-weight: 600; }
+  #banner.error { display: block; background: #fef2f2; color: #991b1b; border: 1.5px solid #fca5a5; }
+  #banner.info { display: block; background: #eff6ff; color: #1e40af; border: 1.5px solid #bfdbfe; }
+  #status { text-align: center; padding: 48px 0; color: var(--muted); font-size: 15px; font-weight: 600; }
+  .progress { margin: 14px 0 10px; }
+  .progress .bar { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .progress .fill { height: 100%; background: var(--green); border-radius: 999px; width: 0%; transition: width .3s; }
+  .progress .label { font-size: 13px; color: var(--muted); font-weight: 700; margin-top: 6px; }
+  .task { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 10px; cursor: pointer; user-select: none; }
+  .task.done { border-color: #bbf7d0; background: #f0fdf4; }
+  .task .box { flex: 0 0 28px; height: 28px; border: 2px solid #d6d3d1; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; background: #fff; }
+  .task.done .box { background: var(--green); border-color: var(--green); }
+  .task .label { flex: 1; font-size: 16px; font-weight: 600; }
+  .task.done .label { color: var(--green-dark); }
+  .task .time { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .task .del { flex: 0 0 auto; border: 1.5px solid #fca5a5; background: #fef2f2; color: #991b1b; border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .empty { text-align: center; color: var(--muted); padding: 36px 12px; font-size: 15px; }
+  .send { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, var(--bg) 30%); }
+  .send button { width: 100%; max-width: 528px; margin: 0 auto; display: block; background: #25d366; color: #fff; border: none; border-radius: 14px; padding: 16px; font-size: 17px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 14px rgba(37,211,102,.35); }
+  .send button:active { transform: scale(.98); }
+  /* Boss */
+  .pin-screen { text-align: center; padding: 60px 0; }
+  .pin-screen h2 { font-size: 18px; margin-bottom: 16px; }
+  .pin-screen input { font-size: 28px; text-align: center; letter-spacing: 12px; width: 200px; padding: 12px; border: 2px solid var(--line); border-radius: 12px; outline: none; }
+  .pin-screen input:focus { border-color: var(--green); }
+  .pin-screen .err { color: var(--red); font-weight: 700; font-size: 14px; margin-top: 12px; min-height: 20px; }
+  .boss-badge { background: #fef3c7; color: #92400e; border: 1.5px solid #fcd34d; border-radius: 999px; font-size: 12px; font-weight: 800; padding: 4px 10px; }
+  .addrow { display: flex; gap: 8px; margin: 14px 0; }
+  .addrow input { flex: 1; font-size: 16px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; outline: none; }
+  .addrow input:focus { border-color: var(--green); }
+  .addrow button { background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 12px 18px; font-size: 15px; font-weight: 800; cursor: pointer; }
+  h3.section { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin: 18px 0 8px; }
+</style>
+</head>
+<body>
+<script type="module">
+  // ============================================================
+  // CONFIG
+  // ============================================================
+  const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyB5QfSiuwjDGwZOZMHzN3BhziK_AKVeBNg",
+    authDomain: "bellville-production-ffb19.firebaseapp.com",
+    projectId: "bellville-production-ffb19",
+    storageBucket: "bellville-production-ffb19.firebasestorage.app",
+    messagingSenderId: "505275243511",
+    appId: "1:505275243511:web:8419f7ca02e9dc542f2cf2"
+  };
+  const STAFF_NAME = "[NAME]";
+  const BOSS_PHONE = ""; // digits only, e.g. "27821234567" — blank opens the WhatsApp contact picker
+  const BOSS_PIN = "2468";
+  // ============================================================
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getFirestore, doc, setDoc, updateDoc, onSnapshot, deleteField } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+  const IS_BOSS = new URLSearchParams(location.search).get('boss') === '1';
+  const todayId = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); // YYYY-MM-DD local
+  const niceDate = new Date().toLocaleDateString('en-ZA', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+
+  const app = initializeApp(FIREBASE_CONFIG);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  const configRef = () => doc(db, 'rc_tasks', 'config');
+  const dayRef = () => doc(db, 'rc_days', todayId);
+
+  let tasks = [];      // [{id, label}]
+  let dayDone = {};    // {taskId: {at, by}}
+  let unlocked = !IS_BOSS;
+  let gotConfig = false, gotDay = false;
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  document.body.insertAdjacentHTML('beforeend', `
+    <div class="wrap">
+      <header>
+        <span class="logo">🦎</span>
+        <div style="flex:1">
+          <h1>ReptiCube Daily</h1>
+          <div class="date">${esc(niceDate)}${IS_BOSS ? '' : ' · ' + esc(STAFF_NAME)}</div>
+        </div>
+        ${IS_BOSS ? '<span class="boss-badge">BOSS</span>' : ''}
+      </header>
+      <div id="banner"></div>
+      <div id="status">Connecting…</div>
+      <div id="app" style="display:none"></div>
+    </div>
+    <div class="send" id="sendbar" style="display:none">
+      <button id="sendbtn">📲 Send report on WhatsApp</button>
+    </div>`);
+
+  function showError(msg) {
+    const b = $('banner');
+    b.className = 'error';
+    b.textContent = '⚠ ' + msg;
+    $('status').style.display = 'none';
+  }
+
+  function render() {
+    if (!gotConfig || !gotDay) return;
+    $('status').style.display = 'none';
+    const appEl = $('app');
+    appEl.style.display = 'block';
+
+    if (IS_BOSS && !unlocked) {
+      appEl.innerHTML = `
+        <div class="pin-screen">
+          <h2>🔒 Enter boss PIN</h2>
+          <input id="pin" type="password" inputmode="numeric" maxlength="4" autocomplete="off">
+          <div class="err" id="pinerr"></div>
+        </div>`;
+      const pinEl = $('pin');
+      pinEl.focus();
+      pinEl.addEventListener('input', () => {
+        if (pinEl.value.length === 4) {
+          if (pinEl.value === BOSS_PIN) { unlocked = true; render(); }
+          else { $('pinerr').textContent = 'Wrong PIN'; pinEl.value = ''; }
+        }
+      });
+      return;
+    }
+
+    const doneCount = tasks.filter(t => dayDone[t.id]).length;
+    const pct = tasks.length ? Math.round(doneCount / tasks.length * 100) : 0;
+    let html = '';
+
+    if (IS_BOSS) {
+      html += `<h3 class="section">Add task</h3>
+        <div class="addrow">
+          <input id="newtask" placeholder="New task…" maxlength="120">
+          <button id="addbtn">Add</button>
+        </div>
+        <h3 class="section">Today's checklist</h3>`;
+    }
+
+    html += `<div class="progress">
+        <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
+        <div class="label">${doneCount} of ${tasks.length} done</div>
+      </div>`;
+
+    if (!tasks.length) {
+      html += `<div class="empty">No tasks yet.${IS_BOSS ? '' : ' Ask the boss to add some.'}</div>`;
+    }
+    for (const t of tasks) {
+      const d = dayDone[t.id];
+      const time = d && d.at ? new Date(d.at).toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' }) : '';
+      html += `<div class="task ${d ? 'done' : ''}" data-id="${esc(t.id)}">
+          <div class="box">${d ? '✓' : ''}</div>
+          <div class="label">${esc(t.label)}</div>
+          ${time ? `<div class="time">${esc(time)}</div>` : ''}
+          ${IS_BOSS ? `<button class="del" data-del="${esc(t.id)}">🗑</button>` : ''}
+        </div>`;
+    }
+    appEl.innerHTML = html;
+    $('sendbar').style.display = 'block';
+
+    appEl.querySelectorAll('.task').forEach(el => {
+      el.addEventListener('click', (ev) => {
+        if (ev.target.closest('[data-del]')) return;
+        toggleTask(el.dataset.id);
+      });
+    });
+    appEl.querySelectorAll('[data-del]').forEach(el => {
+      el.addEventListener('click', () => deleteTask(el.dataset.del));
+    });
+    if (IS_BOSS) {
+      $('addbtn').addEventListener('click', addTask);
+      $('newtask').addEventListener('keydown', (e) => { if (e.key === 'Enter') addTask(); });
+    }
+  }
+
+  async function toggleTask(id) {
+    const was = dayDone[id];
+    try {
+      if (was) {
+        await setDoc(dayRef(), { done: { [id]: deleteField() } }, { merge: true });
+      } else {
+        await setDoc(dayRef(), {
+          date: todayId,
+          staff: STAFF_NAME,
+          done: { [id]: { at: new Date().toISOString(), by: IS_BOSS ? 'Boss' : STAFF_NAME } },
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+      }
+    } catch (e) {
+      showError('Could not save: ' + e.message);
+    }
+  }
+
+  async function addTask() {
+    const inp = $('newtask');
+    const label = inp.value.trim();
+    if (!label) return;
+    const id = 't' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    try {
+      await setDoc(configRef(), { tasks: [...tasks, { id, label }], updatedAt: new Date().toISOString() }, { merge: true });
+      inp.value = '';
+    } catch (e) {
+      showError('Could not add task: ' + e.message);
+    }
+  }
+
+  async function deleteTask(id) {
+    try {
+      await setDoc(configRef(), { tasks: tasks.filter(t => t.id !== id), updatedAt: new Date().toISOString() }, { merge: true });
+    } catch (e) {
+      showError('Could not delete task: ' + e.message);
+    }
+  }
+
+  function sendReport() {
+    const done = tasks.filter(t => dayDone[t.id]);
+    const lines = [
+      `🦎 ReptiCube Daily Report — ${niceDate}`,
+      `Staff: ${STAFF_NAME}`,
+      `Done: ${done.length}/${tasks.length}`,
+      ''
+    ];
+    for (const t of tasks) {
+      const d = dayDone[t.id];
+      const time = d && d.at ? ' (' + new Date(d.at).toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' }) + ')' : '';
+      lines.push((d ? '✅ ' : '❌ ') + t.label + time);
+    }
+    const url = 'https://wa.me/' + BOSS_PHONE + '?text=' + encodeURIComponent(lines.join('\n'));
+    window.open(url, '_blank');
+  }
+  document.addEventListener('click', (e) => { if (e.target.id === 'sendbtn') sendReport(); });
+
+  // Kiosk auth (same pattern as reptipos) so rules requiring a signed-in user pass.
+  signInAnonymously(auth).catch((e) => console.warn('Anon auth unavailable:', e.message));
+
+  onSnapshot(configRef(), (snap) => {
+    tasks = (snap.exists() && Array.isArray(snap.data().tasks)) ? snap.data().tasks : [];
+    gotConfig = true;
+    render();
+  }, (e) => showError('Firestore error: ' + e.message));
+
+  onSnapshot(dayRef(), (snap) => {
+    dayDone = (snap.exists() && snap.data().done) ? snap.data().done : {};
+    gotDay = true;
+    render();
+  }, (e) => showError('Firestore error: ' + e.message));
+</script>
+</body>
+</html>
